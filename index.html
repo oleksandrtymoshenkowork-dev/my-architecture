@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="uk" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Олександр Тимошенко | Архітектор</title>
+    <meta name="description" content="Портфоліо архітектора Олександра Тимошенка. Поєднання традиційного проектування з сучасними BIM технологіями.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        accent: '#1e3a8a',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans selection:bg-accent selection:text-white">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 font-serif font-bold text-xl tracking-wider text-accent">
+                    О.ТИМОШЕНКО
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#hero" class="text-slate-600 hover:text-accent px-3 py-2 text-sm font-medium transition-colors">Привітання</a>
+                        <a href="#resume" class="text-slate-600 hover:text-accent px-3 py-2 text-sm font-medium transition-colors">Резюме</a>
+                        <a href="#portfolio" class="text-slate-600 hover:text-accent px-3 py-2 text-sm font-medium transition-colors">Портфоліо</a>
+                        <a href="#contacts" class="text-slate-600 hover:text-accent px-3 py-2 text-sm font-medium transition-colors">Контакти</a>
+                    </div>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-slate-600 hover:text-accent p-2">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-center">
+                <a href="#hero" class="block text-slate-600 hover:text-accent px-3 py-4 text-base font-medium border-b border-slate-100">Привітання</a>
+                <a href="#resume" class="block text-slate-600 hover:text-accent px-3 py-4 text-base font-medium border-b border-slate-100">Резюме</a>
+                <a href="#portfolio" class="block text-slate-600 hover:text-accent px-3 py-4 text-base font-medium border-b border-slate-100">Портфоліо</a>
+                <a href="#contacts" class="block text-slate-600 hover:text-accent px-3 py-4 text-base font-medium">Контакти</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center justify-center pt-16 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col items-center text-center">
+            <div class="relative mb-8 fade-in">
+                <div class="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-slate-100 shadow-xl">
+                    <img src="assets/images/Моя фотографія.jpg" alt="Олександр Тимошенко" class="w-full h-full object-cover" loading="lazy">
+                </div>
+                <div class="absolute -bottom-2 -right-2 bg-accent text-white p-3 rounded-full shadow-lg">
+                    <i class="fas fa-compass text-xl"></i>
+                </div>
+            </div>
+            
+            <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl mb-6 text-slate-900 fade-in">
+                Алгоритм, що стає простором.
+            </h1>
+            
+            <p class="max-w-2xl text-lg md:text-xl text-slate-600 mb-10 leading-relaxed fade-in">
+                Вітаю! Я Олександр Тимошенко — архітектор, що поєднує традиційне проектування 
+                з сучасними BIM технологіями. Створюю простори, де алгоритм стає архітектурою, 
+                а технології служать людині.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 fade-in">
+                <a href="#portfolio" class="bg-accent hover:bg-blue-800 text-white px-8 py-4 rounded-full font-semibold transition-all shadow-lg hover:shadow-accent/30">
+                    Переглянути портфоліо
+                </a>
+                <a href="#contacts" class="border-2 border-slate-200 hover:border-accent hover:text-accent px-8 py-4 rounded-full font-semibold transition-all">
+                    Зв'язатися
+                </a>
+            </div>
+        </div>
+        
+        <!-- Decorative Elements -->
+        <div class="absolute top-1/4 -left-20 w-64 h-64 bg-accent/5 rounded-full blur-3xl -z-10"></div>
+        <div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-accent/10 rounded-full blur-3xl -z-10"></div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="font-serif text-3xl md:text-4xl text-center mb-16 text-slate-900 relative">
+                Резюме
+                <span class="block w-12 h-1 bg-accent mx-auto mt-4"></span>
+            </h2>
+            
+            <div class="grid lg:grid-cols-2 gap-16">
+                
+                <!-- Experience -->
+                <div class="fade-in">
+                    <h3 class="text-2xl font-bold mb-8 flex items-center gap-3">
+                        <i class="fas fa-briefcase text-accent"></i> Досвід роботи
+                    </h3>
+                    <div class="space-y-8 relative before:absolute before:left-[17px] before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-200">
+                        
+                        <!-- Item 1 -->
+                        <div class="relative pl-12">
+                            <div class="absolute left-0 top-1.5 w-[36px] h-[36px] bg-white border-2 border-accent rounded-full flex items-center justify-center z-10">
+                                <div class="w-2 h-2 bg-accent rounded-full"></div>
+                            </div>
+                            <span class="text-sm font-bold text-accent mb-1 block">06.2025 — 01.2026 (поточна)</span>
+                            <h4 class="text-xl font-bold">Архітектор</h4>
+                            <p class="text-slate-600 font-medium">Майстерня комфорту, Львів</p>
+                            <p class="text-slate-500 text-sm mt-2">Будівництво, архітектура, дизайн інтер'єру</p>
+                        </div>
+                        
+                        <!-- Item 2 -->
+                        <div class="relative pl-12">
+                            <div class="absolute left-0 top-1.5 w-[36px] h-[36px] bg-white border-2 border-slate-300 rounded-full flex items-center justify-center z-10">
+                                <div class="w-2 h-2 bg-slate-300 rounded-full"></div>
+                            </div>
+                            <span class="text-sm font-bold text-slate-500 mb-1 block">07.2024 — 12.2024</span>
+                            <h4 class="text-xl font-bold text-slate-800">Архітектор</h4>
+                            <p class="text-slate-600 font-medium">А7 Хаб, Львів</p>
+                            <p class="text-slate-500 text-sm mt-2">Будівництво, архітектура, дизайн інтер'єру</p>
+                        </div>
+                        
+                        <!-- Item 3 -->
+                        <div class="relative pl-12">
+                            <div class="absolute left-0 top-1.5 w-[36px] h-[36px] bg-white border-2 border-slate-300 rounded-full flex items-center justify-center z-10">
+                                <div class="w-2 h-2 bg-slate-300 rounded-full"></div>
+                            </div>
+                            <span class="text-sm font-bold text-slate-500 mb-1 block">03.2024 — 06.2024</span>
+                            <h4 class="text-xl font-bold text-slate-800">Архітектор</h4>
+                            <p class="text-slate-600 font-medium">АртХаусБуд, Львів</p>
+                            <p class="text-slate-500 text-sm mt-2">Будівництво, архітектура, дизайн інтер'єру</p>
+                        </div>
+                        
+                        <!-- Item 4 -->
+                        <div class="relative pl-12">
+                            <div class="absolute left-0 top-1.5 w-[36px] h-[36px] bg-white border-2 border-slate-300 rounded-full flex items-center justify-center z-10">
+                                <div class="w-2 h-2 bg-slate-300 rounded-full"></div>
+                            </div>
+                            <span class="text-sm font-bold text-slate-500 mb-1 block">03.2021 — 07.2021</span>
+                            <h4 class="text-xl font-bold text-slate-800">Адміністратор відділення</h4>
+                            <p class="text-slate-600 font-medium">ТОВ «Нова Пей», Львів</p>
+                            <p class="text-slate-500 text-sm mt-2">Транспорт, логістика</p>
+                        </div>
+                        
+                        <!-- Item 5 -->
+                        <div class="relative pl-12">
+                            <div class="absolute left-0 top-1.5 w-[36px] h-[36px] bg-white border-2 border-slate-300 rounded-full flex items-center justify-center z-10">
+                                <div class="w-2 h-2 bg-slate-300 rounded-full"></div>
+                            </div>
+                            <span class="text-sm font-bold text-slate-500 mb-1 block">06.2018 — 07.2018</span>
+                            <h4 class="text-xl font-bold text-slate-800">Помічник архітектора</h4>
+                            <p class="text-slate-600 font-medium">Архітектура плюс дизайн, Житомир</p>
+                            <p class="text-slate-500 text-sm mt-2">Практика на фірмі «Архітектураплюс Дизайн»</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-16">
+                    <!-- Education -->
+                    <div class="fade-in">
+                        <h3 class="text-2xl font-bold mb-8 flex items-center gap-3">
+                            <i class="fas fa-graduation-cap text-accent"></i> Освіта
+                        </h3>
+                        <div class="space-y-6">
+                            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                                <span class="text-sm font-bold text-accent">2023 — 2024</span>
+                                <h4 class="text-lg font-bold mt-1">НУ «Львівська політехніка»</h4>
+                                <p class="text-slate-600">Архітектура та містобудування (Вища освіта)</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                                <span class="text-sm font-bold text-accent">2020 — 2023</span>
+                                <h4 class="text-lg font-bold mt-1">НУ «Львівська політехніка»</h4>
+                                <p class="text-slate-600">Архітектура та містобудування (Незакінчена вища)</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                                <span class="text-sm font-bold text-accent">2016 — 2020</span>
+                                <h4 class="text-lg font-bold mt-1">Будівельний коледж ЖНАЕУ</h4>
+                                <p class="text-slate-600">Опорядження будівель і споруд та будівельний дизайн</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Skills -->
+                    <div class="fade-in">
+                        <h3 class="text-2xl font-bold mb-8 flex items-center gap-3">
+                            <i class="fas fa-laptop-code text-accent"></i> Навички
+                        </h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="font-medium">ArchiCAD</span>
+                                    <span class="text-slate-500">7/10</span>
+                                </div>
+                                <div class="w-full bg-slate-200 rounded-full h-2">
+                                    <div class="bg-accent h-2 rounded-full" style="width: 70%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="font-medium">Enscape</span>
+                                    <span class="text-slate-500">6/10</span>
+                                </div>
+                                <div class="w-full bg-slate-200 rounded-full h-2">
+                                    <div class="bg-accent h-2 rounded-full" style="width: 60%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="font-medium">AutoCAD / Twinmotion / CapCut</span>
+                                    <span class="text-slate-500">5/10</span>
+                                </div>
+                                <div class="w-full bg-slate-200 rounded-full h-2">
+                                    <div class="bg-accent h-2 rounded-full" style="width: 50%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="font-medium">Photoshop / Illustrator / Premiere Pro</span>
+                                    <span class="text-slate-500">4/10</span>
+                                </div>
+                                <div class="w-full bg-slate-200 rounded-full h-2">
+                                    <div class="bg-accent h-2 rounded-full" style="width: 40%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="font-medium">Revit</span>
+                                    <span class="text-slate-500">3/10</span>
+                                </div>
+                                <div class="w-full bg-slate-200 rounded-full h-2">
+                                    <div class="bg-accent h-2 rounded-full" style="width: 30%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 flex flex-wrap gap-2">
+                            <span class="bg-slate-200 text-slate-700 px-3 py-1 rounded-md text-sm font-medium">Nano Banana Pro</span>
+                            <span class="bg-slate-200 text-slate-700 px-3 py-1 rounded-md text-sm font-medium">NotebookLM</span>
+                            <span class="bg-slate-200 text-slate-700 px-3 py-1 rounded-md text-sm font-medium">Google Gemini</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Expectations -->
+            <div class="mt-24 max-w-4xl mx-auto fade-in">
+                <div class="bg-accent text-white p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
+                    <i class="fas fa-quote-right absolute -bottom-10 -right-10 text-[150px] opacity-10"></i>
+                    <h3 class="text-2xl font-bold mb-6 border-b border-white/20 pb-4">Чого я чекаю від нашої співпраці?</h3>
+                    <div class="space-y-4 text-lg md:text-xl font-light leading-relaxed italic">
+                        <p>— Масштабних викликів, де потрібен не просто виконавець, а творець.</p>
+                        <p>— Переходу від 2D мислення до повноцінної BIM екосистеми.</p>
+                        <p>— Можливості міксувати архітектурну класику з алгоритмічним дизайном.</p>
+                        <p class="font-bold not-italic mt-6 pt-4 text-white">Давайте створювати те, що раніше здавалося неможливим.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="font-serif text-3xl md:text-4xl text-center mb-8 text-slate-900">
+                Портфоліо
+                <span class="block w-12 h-1 bg-accent mx-auto mt-4"></span>
+            </h2>
+            
+            <p class="text-center text-slate-500 mb-12 max-w-2xl mx-auto">
+                Збірка реалізованих та концептуальних проектів, що демонструють володіння 
+                як класичними методами, так і сучасними BIM інструментами.
+            </p>
+            
+            <!-- Tabs -->
+            <div class="flex justify-center mb-16">
+                <div class="inline-flex bg-slate-100 p-1 rounded-xl">
+                    <button id="tab-working" class="px-6 py-2 rounded-lg font-medium transition-all bg-white shadow-sm text-accent" onclick="switchPortfolio('working')">
+                        Робочі проекти
+                    </button>
+                    <button id="tab-conceptual" class="px-6 py-2 rounded-lg font-medium transition-all text-slate-500 hover:text-slate-900" onclick="switchPortfolio('conceptual')">
+                        Концептуальні
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Grid Working -->
+            <div id="grid-working" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="group bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 hover:shadow-2xl transition-all cursor-pointer" onclick="openModal('working-1')">
+                    <div class="aspect-[4/3] overflow-hidden relative">
+                        <img src="assets/images/Церква.png" alt="Церква в Карпатах" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy">
+                        <div class="absolute inset-0 bg-accent/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="bg-white text-accent px-4 py-2 rounded-full font-bold shadow-lg">Детальніше</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold mb-2">Церква в Карпатах</h4>
+                        <p class="text-slate-500 text-sm mb-4">Візуалізація (екстер'єр), креслення</p>
+                        <div class="flex gap-2">
+                            <span class="bg-blue-100 text-accent text-[10px] uppercase font-bold px-2 py-1 rounded">Visual</span>
+                            <span class="bg-blue-100 text-accent text-[10px] uppercase font-bold px-2 py-1 rounded">Drafts</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="group bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 hover:shadow-2xl transition-all cursor-pointer" onclick="openModal('working-2')">
+                    <div class="aspect-[4/3] overflow-hidden relative bg-slate-200 flex items-center justify-center">
+                        <i class="fas fa-file-pdf text-6xl text-slate-300"></i>
+                        <div class="absolute inset-0 bg-accent/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="bg-white text-accent px-4 py-2 rounded-full font-bold shadow-lg">Детальніше</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold mb-2">ЖК Васильєва</h4>
+                        <p class="text-slate-500 text-sm mb-4">Креслення</p>
+                        <div class="flex gap-2">
+                            <span class="bg-blue-100 text-accent text-[10px] uppercase font-bold px-2 py-1 rounded">Drafts</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="group bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 hover:shadow-2xl transition-all cursor-pointer" onclick="openModal('working-3')">
+                    <div class="aspect-[4/3] overflow-hidden relative bg-slate-200 flex items-center justify-center">
+                        <i class="fas fa-cube text-6xl text-slate-300"></i>
+                        <div class="absolute inset-0 bg-accent/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="bg-white text-accent px-4 py-2 rounded-full font-bold shadow-lg">Детальніше</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold mb-2">ЖК Лісові гринівці</h4>
+                        <p class="text-slate-500 text-sm mb-4">3D вигляд, креслення, BIMx</p>
+                        <div class="flex gap-2">
+                            <span class="bg-blue-100 text-accent text-[10px] uppercase font-bold px-2 py-1 rounded">3D</span>
+                            <span class="bg-blue-100 text-accent text-[10px] uppercase font-bold px-2 py-1 rounded">BIMx</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Grid Conceptual -->
+            <div id="grid-conceptual" class="hidden grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Item 1: Стадіон -->
+                <div class="group bg-slate-50 rounded-xl overflow-hidden border border-slate-100 hover:shadow-xl transition-all cursor-pointer" onclick="openModal('conc-1')">
+                    <div class="aspect-square bg-slate-200 flex items-center justify-center relative overflow-hidden">
+                        <i class="fas fa-building text-4xl text-slate-300"></i>
+                        <div class="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-slate-800 line-clamp-1">Стадіон (Тернопіль)</h4>
+                        <p class="text-slate-500 text-xs mt-1">Креслення</p>
+                    </div>
+                </div>
+                <!-- Item 2: ГП -->
+                <div class="group bg-slate-50 rounded-xl overflow-hidden border border-slate-100 hover:shadow-xl transition-all cursor-pointer" onclick="openModal('conc-2')">
+                    <div class="aspect-square bg-slate-200 flex items-center justify-center relative overflow-hidden">
+                        <i class="fas fa-map text-4xl text-slate-300"></i>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-slate-800 line-clamp-1">Генплан ЖК (Вінниця)</h4>
+                        <p class="text-slate-500 text-xs mt-1">Креслення</p>
+                    </div>
+                </div>
+                <!-- Item 3: Однородинний -->
+                <div class="group bg-slate-50 rounded-xl overflow-hidden border border-slate-100 hover:shadow-xl transition-all cursor-pointer" onclick="openModal('conc-3')">
+                    <div class="aspect-square overflow-hidden relative">
+                        <img src="assets/images/Однородинний.png" alt="Однородинний будинок" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-slate-800 line-clamp-1">Однородинний будинок</h4>
+                        <p class="text-slate-500 text-xs mt-1">Visual, Drafts</p>
+                    </div>
+                </div>
+                <!-- Item 4: Maxi -->
+                <div class="group bg-slate-50 rounded-xl overflow-hidden border border-slate-100 hover:shadow-xl transition-all cursor-pointer" onclick="openModal('conc-4')">
+                    <div class="aspect-square overflow-hidden relative">
+                        <img src="assets/images/Maxi.png" alt="Модульний будинок Maxi" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-slate-800 line-clamp-1">Модульний будинок Maxi</h4>
+                        <p class="text-slate-500 text-xs mt-1">Visual, Drafts</p>
+                    </div>
+                </div>
+                <!-- Item 5: Mini -->
+                <div class="group bg-slate-50 rounded-xl overflow-hidden border border-slate-100 hover:shadow-xl transition-all cursor-pointer" onclick="openModal('conc-5')">
+                    <div class="aspect-square overflow-hidden relative">
+                        <img src="assets/images/Mini.png" alt="Модульний будинок Mini" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-slate-800 line-clamp-1">Модульний будинок Mini</h4>
+                        <p class="text-slate-500 text-xs mt-1">Visual, Drafts</p>
+                    </div>
+                </div>
+                <!-- Item 6: Офіс -->
+                <div class="group bg-slate-50 rounded-xl overflow-hidden border border-slate-100 hover:shadow-xl transition-all cursor-pointer" onclick="openModal('conc-6')">
+                    <div class="aspect-square overflow-hidden relative">
+                        <img src="assets/images/Офіс.png" alt="Модульний офіс" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-slate-800 line-clamp-1">Модульний офіс</h4>
+                        <p class="text-slate-500 text-xs mt-1">Visual, Drafts</p>
+                    </div>
+                </div>
+                <!-- Item 7: Госп -->
+                <div class="group bg-slate-50 rounded-xl overflow-hidden border border-slate-100 hover:shadow-xl transition-all cursor-pointer" onclick="openModal('conc-7')">
+                    <div class="aspect-square overflow-hidden relative">
+                        <img src="assets/images/Госп.буд.png" alt="Господарський будиночок" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-slate-800 line-clamp-1">Господарський буд.</h4>
+                        <p class="text-slate-500 text-xs mt-1">Visual, Drafts</p>
+                    </div>
+                </div>
+                <!-- Item 8: Котедж -->
+                <div class="group bg-slate-50 rounded-xl overflow-hidden border border-slate-100 hover:shadow-xl transition-all cursor-pointer" onclick="openModal('conc-8')">
+                    <div class="aspect-square overflow-hidden relative">
+                        <img src="assets/images/Котедж.png" alt="Котедж" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-slate-800 line-clamp-1">Котедж</h4>
+                        <p class="text-slate-500 text-xs mt-1">Multi-view project</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacts Section -->
+    <section id="contacts" class="py-24 bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="max-w-3xl mx-auto">
+                <div class="fade-in">
+                    <h2 class="font-serif text-4xl md:text-5xl mb-6">Готові до нових<br><span class="text-accent">викликів?</span></h2>
+                    <p class="text-slate-400 text-lg mb-16 leading-relaxed">
+                        Якщо вам потрібен архітектор, який не боїться складних завдань та прагне до інновацій — я відкритий до пропозицій.
+                    </p>
+                    
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <!-- Email -->
+                        <div class="bg-white/5 p-8 rounded-3xl border border-white/10 hover:border-accent/50 transition-all group">
+                            <div class="w-16 h-16 bg-accent/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-accent transition-all">
+                                <i class="fas fa-envelope text-2xl text-accent group-hover:text-white"></i>
+                            </div>
+                            <p class="text-xs text-slate-500 uppercase font-bold tracking-widest mb-2">Email</p>
+                            <a href="mailto:oleksandr.tymoshenko.work@gmail.com" class="text-sm md:text-base font-medium hover:text-accent transition-colors break-all">
+                                oleksandr.tymoshenko.work@gmail.com
+                            </a>
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="bg-white/5 p-8 rounded-3xl border border-white/10 hover:border-accent/50 transition-all group">
+                            <div class="w-16 h-16 bg-accent/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-accent transition-all">
+                                <i class="fas fa-phone text-2xl text-accent group-hover:text-white"></i>
+                            </div>
+                            <p class="text-xs text-slate-500 uppercase font-bold tracking-widest mb-2">Phone</p>
+                            <button onclick="copyToClipboard('+380630199204')" class="text-lg font-bold hover:text-accent transition-colors cursor-pointer">
+                                +38 063 01 99 204
+                            </button>
+                        </div>
+
+                        <!-- Telegram -->
+                        <div class="bg-white/5 p-8 rounded-3xl border border-white/10 hover:border-accent/50 transition-all group">
+                            <div class="w-16 h-16 bg-accent/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-accent transition-all">
+                                <i class="fab fa-telegram-plane text-2xl text-accent group-hover:text-white"></i>
+                            </div>
+                            <p class="text-xs text-slate-500 uppercase font-bold tracking-widest mb-2">Telegram</p>
+                            <a href="https://t.me/Tymoshenko_official" target="_blank" class="text-lg font-bold hover:text-accent transition-colors">
+                                @Tymoshenko_official
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-slate-900 border-t border-white/5 text-center text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p>© 2026 Олександр Тимошенко. Всі права захищені.</p>
+            <p class="text-xs mt-2 uppercase tracking-widest">Designed for Innovation</p>
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="mt-8 w-10 h-10 rounded-full border border-slate-700 flex items-center justify-center hover:bg-accent hover:border-accent hover:text-white transition-all mx-auto">
+                <i class="fas fa-chevron-up"></i>
+            </button>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="project-modal" class="fixed inset-0 z-[100] hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+            <div id="modal-overlay" class="fixed inset-0 transition-opacity bg-slate-900/90 backdrop-blur-sm" aria-hidden="true" onclick="closeModal()"></div>
+            
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            
+            <div id="modal-content" class="inline-block align-bottom bg-white rounded-3xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-5xl sm:w-full opacity-0 translate-y-4 duration-300">
+                <div class="absolute top-6 right-6 z-10">
+                    <button onclick="closeModal()" class="w-10 h-10 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center transition-colors">
+                        <i class="fas fa-times text-slate-500"></i>
+                    </button>
+                </div>
+                
+                <div class="flex flex-col md:flex-row">
+                    <!-- Gallery/Main Image -->
+                    <div id="modal-gallery" class="w-full md:w-2/3 bg-slate-100 min-h-[400px] flex items-center justify-center relative">
+                        <img id="modal-img-main" src="" alt="" class="max-w-full max-h-[70vh] object-contain">
+                        
+                        <!-- Gallery Nav (if multiple images) -->
+                        <div id="gallery-nav" class="absolute inset-x-0 bottom-6 hidden flex justify-center gap-4">
+                            <button id="prev-img" class="w-10 h-10 bg-white/80 hover:bg-white rounded-full shadow-md flex items-center justify-center transition-all">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button id="next-img" class="w-10 h-10 bg-white/80 hover:bg-white rounded-full shadow-md flex items-center justify-center transition-all">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Info -->
+                    <div class="w-full md:w-1/3 p-8 md:p-12 overflow-y-auto max-h-[90vh]">
+                        <h3 id="modal-title" class="text-3xl font-serif font-bold text-slate-900 mb-2">Project Title</h3>
+                        <p id="modal-category" class="text-accent font-bold uppercase tracking-widest text-xs mb-6">Category</p>
+                        
+                        <div class="prose prose-slate mb-8">
+                            <p id="modal-description" class="text-slate-600 leading-relaxed">
+                                Description goes here...
+                            </p>
+                        </div>
+                        
+                        <div id="modal-files" class="space-y-4 pt-6 border-t border-slate-100">
+                            <!-- Download Buttons will be injected here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
