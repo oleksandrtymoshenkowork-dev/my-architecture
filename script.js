@@ -16,7 +16,7 @@ const projectsData = [
         title: "Генплан ЖК (Вінниця)",
         type: "Концептуальний проект",
         images: ["assets/images/ГП.png"],
-        pdf: "assets/documents/Генплан Вінниця.pdf",
+        pdf: "assets/documents/ГП.pdf",
         category: "conceptual"
     },
     {
