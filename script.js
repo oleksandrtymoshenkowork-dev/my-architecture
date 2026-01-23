@@ -156,13 +156,42 @@ function filterProjects(category) {
  */
 
 /**
+ * Открывает просмотрщик изображений
+ */
+function openImageLightbox(imagePath, projectName) {
+    const modal = document.getElementById('main-modal');
+    const container = document.getElementById('modal-container');
+    
+    container.innerHTML = `
+        <div class="bg-slate-900 rounded-[2rem] w-full h-[95vh] flex flex-col overflow-hidden shadow-2xl animate-fade-in-up border border-white/10">
+            <div class="flex justify-between items-center p-6 border-b border-white/5 bg-slate-900/50 backdrop-blur">
+                <div class="text-white">
+                    <h3 class="text-xl font-bold">${projectName}</h3>
+                    <p class="text-xs text-blue-400 font-bold uppercase tracking-widest mt-1">Перегляд зображення</p>
+                </div>
+                <button onclick="closeMainModal()" class="w-12 h-12 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-all text-white">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="flex-1 relative flex items-center justify-center p-4 overflow-auto">
+                <img src="${imagePath}" alt="${projectName}" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl">
+            </div>
+        </div>
+    `;
+    
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    document.addEventListener('keydown', handleEscapeKey);
+}
+
+/**
  * Открывает улучшенный просмотрщик PDF
  */
 function openPDFViewer(pdfPath, projectName) {
     const modal = document.getElementById('main-modal');
     const container = document.getElementById('modal-container');
     
-    // Очищаем и создаем структуру просмотрщика
+    // Очищаем и создаем структуру просмотрщика (БЕЗ КНОПОК ЗАГРУЗКИ)
     container.innerHTML = `
         <div class="bg-white rounded-[2rem] w-full h-[95vh] flex flex-col overflow-hidden shadow-2xl animate-fade-in-up">
             <!-- Шапка окна -->
@@ -177,9 +206,6 @@ function openPDFViewer(pdfPath, projectName) {
                     </div>
                 </div>
                 <div class="flex items-center gap-3">
-                    <a href="${pdfPath}" download class="hidden sm:flex items-center gap-2 px-6 py-2 bg-accent text-white rounded-xl hover:bg-blue-800 transition-all font-bold text-sm">
-                        <i class="fas fa-download"></i> Завантажити
-                    </a>
                     <button onclick="closeMainModal()" class="w-12 h-12 bg-slate-200 hover:bg-slate-300 rounded-xl flex items-center justify-center transition-all text-slate-600">
                         <i class="fas fa-times text-xl"></i>
                     </button>
@@ -188,18 +214,11 @@ function openPDFViewer(pdfPath, projectName) {
             
             <!-- Фрейм с PDF -->
             <div class="flex-1 bg-slate-200 relative">
-                <iframe src="${pdfPath}#toolbar=1" class="w-full h-full border-none" title="${projectName}"></iframe>
+                <iframe src="${pdfPath}#view=FitH&toolbar=0&navpanes=0" class="w-full h-full border-none" title="${projectName}"></iframe>
                 <!-- Заглушка загрузки -->
                 <div class="absolute inset-0 -z-10 flex items-center justify-center">
                     <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-accent"></div>
                 </div>
-            </div>
-            
-            <!-- Футер окна (для мобильных) -->
-            <div class="p-4 bg-slate-50 border-t sm:hidden text-center">
-                <a href="${pdfPath}" download class="inline-flex items-center gap-2 px-6 py-3 bg-accent text-white rounded-xl font-bold">
-                    <i class="fas fa-download"></i> Завантажити PDF
-                </a>
             </div>
         </div>
     `;
@@ -222,7 +241,7 @@ function openCottageGallery() {
         { src: 'assets/images/Котедж.png', title: 'Екстер\'єр - Головний вид' },
         { src: 'assets/images/Вид_1.png', title: 'Вид з саду' },
         { src: 'assets/images/Вид_2.png', title: 'Нічна візуалізація' },
-        { src: 'assets/images/3д.png', title: 'Конструктивна 3D схема' },
+        { src: 'assets/images/3д.png', title: 'Конструктивна схема' },
         { src: 'assets/images/План.png', title: 'Планування поверху' }
     ];
     

@@ -7,30 +7,30 @@
     --accent-color: #1e3a8a;
     
     /* Hero фото */
-    --hero-photo-size: 300px;
+    --hero-photo-size: 320px;
     --hero-photo-position-x: center;
-    --hero-photo-position-y: 30%; 
-    --hero-photo-scale: 1.2;
+    --hero-photo-position-y: 15%; 
+    --hero-photo-scale: 1.05;
 
     /* Глобальные настройки изображений проектов */
     /* Церква */
-    --church-img-scale: 1;
+    --church-img-scale: 1.02;
     --church-img-position-x: center;
     --church-img-position-y: center;
     --church-img-fit: cover;
     
     /* Котедж */
-    --cottage-img-scale: 1.1;
+    --cottage-img-scale: 1.05;
     --cottage-img-position-x: center;
-    --cottage-img-position-y: 40%;
+    --cottage-img-position-y: center;
     
     /* Mini */
-    --mini-img-scale: 0.9;
-    --mini-img-position-x: 60%;
+    --mini-img-scale: 1.02;
+    --mini-img-position-x: center;
     --mini-img-position-y: center;
 
     /* Другие проекты могут быть добавлены сюда аналогично */
-    --default-img-scale: 1;
+    --default-img-scale: 1.02;
     --default-img-position-x: center;
     --default-img-position-y: center;
     --default-img-fit: cover;

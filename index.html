@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Имя исправлено на полное: ОЛЕКСАНДР ТИМОШЕНКО -->
     <title>ОЛЕКСАНДР ТИМОШЕНКО | Архітектор</title>
-    <meta name="description" content="Портфоліо архітектора Олександра Тимошенка. Поєднання традиційного проектування з сучасними BIM технологіями.">
+    <meta name="description" content="Портфоліо архітектора Олександра Тимошенка. Поєднання традиційного проектування з сучасними цифровими технологіями.">
     
     <!-- Подключение шрифтов: Playfair Display для заголовков и Inter для текста -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -101,7 +101,7 @@
             
             <p class="max-w-2xl text-lg md:text-xl text-slate-600 mb-10 leading-relaxed animate-fade-in-up" style="animation-delay: 0.4s">
                 Вітаю! Я Олександр Тимошенко — архітектор, що поєднує традиційне проектування 
-                з сучасними BIM технологіями. Створюю простори, де алгоритм стає архітектурою, 
+                з сучасними цифровими технологіями. Створюю простори, де алгоритм стає архітектурою, 
                 а технології служать людині.
             </p>
             
@@ -273,7 +273,7 @@
                     <h3 class="text-2xl font-bold mb-6 border-b border-white/20 pb-4">Чого я чекаю від нашої співпраці?</h3>
                     <div class="space-y-4 text-lg md:text-xl font-light leading-relaxed italic">
                         <p>— Масштабних викликів, де потрібен не просто виконавець, а творець.</p>
-                        <p>— Переходу від 2D мислення до повноцінної BIM екосистеми.</p>
+                        <p>— Переходу від традиційного креслення до повноцінної цифрової екосистеми.</p>
                         <p>— Можливості міксувати архітектурну класику з алгоритмічним дизайном.</p>
                         <p class="font-bold not-italic mt-6 pt-4 text-white">Давайте створювати те, що раніше здавалося неможливим.</p>
                     </div>
@@ -336,8 +336,11 @@
 
                 <!-- 3. Однородинний (Концептуальний) -->
                 <div class="project-card bg-white shadow-md animate-on-scroll" data-category="conceptual">
-                    <div class="aspect-[4/3] overflow-hidden relative">
-                        <img src="assets/images/Однородинний.png" alt="Однородинний будинок" class="project-img w-full h-full object-cover" data-project="single-family">
+                    <div class="aspect-[4/3] overflow-hidden relative cursor-pointer group" onclick="openImageLightbox('assets/images/Однородинний.png', 'Однородинний будинок')">
+                        <img src="assets/images/Однородинний.png" alt="Однородинний будинок" class="project-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-project="single-family" loading="lazy">
+                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <i class="fas fa-search-plus text-white text-3xl"></i>
+                        </div>
                     </div>
                     <div class="p-6">
                         <h4 class="text-xl font-bold mb-4">Однородинний будинок</h4>
@@ -349,8 +352,11 @@
 
                 <!-- 4. Maxi (Концептуальний) -->
                 <div class="project-card bg-white shadow-md animate-on-scroll" data-category="conceptual">
-                    <div class="aspect-[4/3] overflow-hidden relative">
-                        <img src="assets/images/Maxi.png" alt="Модульний будинок Maxi" class="project-img w-full h-full object-cover" data-project="maxi">
+                    <div class="aspect-[4/3] overflow-hidden relative cursor-pointer group" onclick="openImageLightbox('assets/images/Maxi.png', 'Модульний будинок Maxi')">
+                        <img src="assets/images/Maxi.png" alt="Модульний будинок Maxi" class="project-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-project="maxi" loading="lazy">
+                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <i class="fas fa-search-plus text-white text-3xl"></i>
+                        </div>
                     </div>
                     <div class="p-6">
                         <h4 class="text-xl font-bold mb-4">Модульний будинок Maxi</h4>
@@ -362,8 +368,11 @@
 
                 <!-- 5. Mini (Концептуальний) -->
                 <div class="project-card bg-white shadow-md animate-on-scroll" data-category="conceptual">
-                    <div class="aspect-[4/3] overflow-hidden relative">
-                        <img src="assets/images/Mini.png" alt="Модульний будинок Mini" class="project-img w-full h-full object-cover" data-project="mini">
+                    <div class="aspect-[4/3] overflow-hidden relative cursor-pointer group" onclick="openImageLightbox('assets/images/Mini.png', 'Модульний будинок Mini')">
+                        <img src="assets/images/Mini.png" alt="Модульний будинок Mini" class="project-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-project="mini" loading="lazy">
+                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <i class="fas fa-search-plus text-white text-3xl"></i>
+                        </div>
                     </div>
                     <div class="p-6">
                         <h4 class="text-xl font-bold mb-4">Модульний будинок Mini</h4>
@@ -375,8 +384,11 @@
 
                 <!-- 6. Офіс (Концептуальний) -->
                 <div class="project-card bg-white shadow-md animate-on-scroll" data-category="conceptual">
-                    <div class="aspect-[4/3] overflow-hidden relative">
-                        <img src="assets/images/Офіс.png" alt="Модульний офіс" class="project-img w-full h-full object-cover" data-project="office">
+                    <div class="aspect-[4/3] overflow-hidden relative cursor-pointer group" onclick="openImageLightbox('assets/images/Офіс.png', 'Модульний офіс')">
+                        <img src="assets/images/Офіс.png" alt="Модульний офіс" class="project-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-project="office" loading="lazy">
+                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <i class="fas fa-search-plus text-white text-3xl"></i>
+                        </div>
                     </div>
                     <div class="p-6">
                         <h4 class="text-xl font-bold mb-4">Модульний офіс</h4>
@@ -388,8 +400,11 @@
 
                 <!-- 7. Госп.буд (Концептуальний) -->
                 <div class="project-card bg-white shadow-md animate-on-scroll" data-category="conceptual">
-                    <div class="aspect-[4/3] overflow-hidden relative">
-                        <img src="assets/images/Госп.буд.png" alt="Господарський будиночок" class="project-img w-full h-full object-cover" data-project="host">
+                    <div class="aspect-[4/3] overflow-hidden relative cursor-pointer group" onclick="openImageLightbox('assets/images/Госп.буд.png', 'Господарський будиночок')">
+                        <img src="assets/images/Госп.буд.png" alt="Господарський будиночок" class="project-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-project="host" loading="lazy">
+                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <i class="fas fa-search-plus text-white text-3xl"></i>
+                        </div>
                     </div>
                     <div class="p-6">
                         <h4 class="text-xl font-bold mb-4">Господарський будиночок</h4>
@@ -401,8 +416,11 @@
 
                 <!-- 8. Котедж (Концептуальний) - ГАЛЕРЕЯ -->
                 <div class="project-card bg-white shadow-md animate-on-scroll" data-category="conceptual">
-                    <div class="aspect-[4/3] overflow-hidden relative">
-                        <img src="assets/images/Котедж.png" alt="Котедж" class="project-img w-full h-full object-cover" data-project="cottage">
+                    <div class="aspect-[4/3] overflow-hidden relative cursor-pointer group" onclick="openCottageGallery()">
+                        <img src="assets/images/Котедж.png" alt="Котедж" class="project-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-project="cottage" loading="lazy">
+                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <i class="fas fa-images text-white text-3xl"></i>
+                        </div>
                         <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold shadow-sm">
                             Multi-view
                         </div>
@@ -422,8 +440,11 @@
 
                 <!-- 9. Церква (Робочий) -->
                 <div class="project-card bg-white shadow-md animate-on-scroll" data-category="working">
-                    <div class="aspect-[4/3] overflow-hidden relative">
-                        <img src="assets/images/Церква.png" alt="Церква в Карпатах" class="project-img w-full h-full object-cover" data-project="church">
+                    <div class="aspect-[4/3] overflow-hidden relative cursor-pointer group" onclick="openImageLightbox('assets/images/Церква.png', 'Церква в Карпатах')">
+                        <img src="assets/images/Церква.png" alt="Церква в Карпатах" class="project-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-project="church" loading="lazy">
+                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <i class="fas fa-search-plus text-white text-3xl"></i>
+                        </div>
                         <div class="absolute top-4 right-4 bg-accent text-white px-3 py-1 rounded-full text-xs font-bold shadow-sm">
                             Робочий
                         </div>
@@ -463,8 +484,6 @@
                         <button onclick="openPDFViewer('assets/documents/ЖК Лісові гринівці.pdf', 'ЖК Лісові гринівці')" class="w-full bg-slate-100 hover:bg-accent hover:text-white py-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
                             <i class="fas fa-file-pdf"></i> Переглянути креслення
                         </button>
-                        <!-- 3D модель временно убрана согласно инструкции -->
-                        <p class="text-[10px] text-slate-400 mt-2 text-center uppercase tracking-widest">3D модель буде додана пізніше</p>
                     </div>
                 </div>
 
