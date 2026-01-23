@@ -306,184 +306,137 @@
             <!-- Сетка проектов (Сначала 8 концептуальных, затем 3 рабочих) -->
             <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <!-- 1. Стадіон (Концептуальний) - БЕЗ ПРЕВЬЮ -->
-                <div class="project-card bg-white shadow-md animate-on-scroll" data-category="conceptual">
+                <!-- 1. Стадіон -->
+                <div class="project-card bg-white shadow-md animate-on-scroll cursor-pointer group" data-category="conceptual" onclick="openProject(0)">
                     <div class="placeholder-image">
                         <i class="fas fa-building text-5xl text-slate-300"></i>
-                        <p class="mt-4 text-slate-500 font-medium">Зображення буде додано</p>
+                        <p class="mt-4 text-slate-500 font-medium">Стадіон (Тернопіль)</p>
                     </div>
-                    <div class="p-6">
-                        <h4 class="text-xl font-bold mb-4">Стадіон (Тернопіль)</h4>
-                        <button onclick="openPDFViewer('assets/documents/Стадіон.pdf', 'Стадіон (Тернопіль)')" class="w-full bg-slate-100 hover:bg-accent hover:text-white py-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                            <i class="fas fa-drafting-compass"></i> Переглянути креслення
-                        </button>
+                    <div class="p-6 border-t border-slate-50">
+                        <h4 class="text-lg font-bold group-hover:text-accent transition-colors">Стадіон (Тернопіль)</h4>
+                        <p class="text-xs text-slate-400 mt-1">Концептуальний проект</p>
                     </div>
                 </div>
 
-                <!-- 2. Генплан Вінниця (Концептуальний) - БЕЗ ПРЕВЬЮ -->
-                <div class="project-card bg-white shadow-md animate-on-scroll" data-category="conceptual">
+                <!-- 2. Генплан Вінниця -->
+                <div class="project-card bg-white shadow-md animate-on-scroll cursor-pointer group" data-category="conceptual" onclick="openProject(1)">
                     <div class="placeholder-image">
                         <i class="fas fa-map-marked-alt text-5xl text-slate-300"></i>
-                        <p class="mt-4 text-slate-500 font-medium">Зображення буде додано</p>
+                        <p class="mt-4 text-slate-500 font-medium">Генплан ЖК (Вінниця)</p>
                     </div>
-                    <div class="p-6">
-                        <h4 class="text-xl font-bold mb-4">Генплан ЖК (Вінниця)</h4>
-                        <button onclick="openPDFViewer('assets/documents/Генплан Вінниця.pdf', 'Генплан ЖК (Вінниця)')" class="w-full bg-slate-100 hover:bg-accent hover:text-white py-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                            <i class="fas fa-drafting-compass"></i> Переглянути креслення
-                        </button>
+                    <div class="p-6 border-t border-slate-50">
+                        <h4 class="text-lg font-bold group-hover:text-accent transition-colors">Генплан ЖК (Вінниця)</h4>
+                        <p class="text-xs text-slate-400 mt-1">Концептуальний проект</p>
                     </div>
                 </div>
 
-                <!-- 3. Однородинний (Концептуальний) -->
-                <div class="project-card bg-white shadow-md animate-on-scroll" data-category="conceptual">
-                    <div class="aspect-[4/3] overflow-hidden relative cursor-pointer group" onclick="openImageLightbox('assets/images/Однородинний.png', 'Однородинний будинок')">
-                        <img src="assets/images/Однородинний.png" alt="Однородинний будинок" class="project-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-project="single-family" loading="lazy">
-                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <i class="fas fa-search-plus text-white text-3xl"></i>
-                        </div>
+                <!-- 3. Однородинний -->
+                <div class="project-card bg-white shadow-md animate-on-scroll cursor-pointer group" data-category="conceptual" onclick="openProject(2)">
+                    <div class="aspect-[4/3] overflow-hidden relative">
+                        <img src="assets/images/Однородинний.png" alt="Однородинний будинок" class="project-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-project="single-family" loading="lazy">
+                        <div class="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     </div>
-                    <div class="p-6">
-                        <h4 class="text-xl font-bold mb-4">Однородинний будинок</h4>
-                        <button onclick="openPDFViewer('assets/documents/Однородинний.pdf', 'Однородинний будинок')" class="w-full bg-slate-100 hover:bg-accent hover:text-white py-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                            <i class="fas fa-drafting-compass"></i> Креслення
-                        </button>
+                    <div class="p-6 border-t border-slate-50">
+                        <h4 class="text-lg font-bold group-hover:text-accent transition-colors">Однородинний будинок</h4>
+                        <p class="text-xs text-slate-400 mt-1">Концептуальний проект</p>
                     </div>
                 </div>
 
-                <!-- 4. Maxi (Концептуальний) -->
-                <div class="project-card bg-white shadow-md animate-on-scroll" data-category="conceptual">
-                    <div class="aspect-[4/3] overflow-hidden relative cursor-pointer group" onclick="openImageLightbox('assets/images/Maxi.png', 'Модульний будинок Maxi')">
-                        <img src="assets/images/Maxi.png" alt="Модульний будинок Maxi" class="project-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-project="maxi" loading="lazy">
-                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <i class="fas fa-search-plus text-white text-3xl"></i>
-                        </div>
+                <!-- 4. Maxi -->
+                <div class="project-card bg-white shadow-md animate-on-scroll cursor-pointer group" data-category="conceptual" onclick="openProject(3)">
+                    <div class="aspect-[4/3] overflow-hidden relative">
+                        <img src="assets/images/Maxi.png" alt="Модульний будинок Maxi" class="project-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-project="maxi" loading="lazy">
+                        <div class="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     </div>
-                    <div class="p-6">
-                        <h4 class="text-xl font-bold mb-4">Модульний будинок Maxi</h4>
-                        <button onclick="openPDFViewer('assets/documents/Maxi.pdf', 'Модульний будинок Maxi')" class="w-full bg-slate-100 hover:bg-accent hover:text-white py-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                            <i class="fas fa-drafting-compass"></i> Креслення
-                        </button>
+                    <div class="p-6 border-t border-slate-50">
+                        <h4 class="text-lg font-bold group-hover:text-accent transition-colors">Модульний будинок Maxi</h4>
+                        <p class="text-xs text-slate-400 mt-1">Концептуальний проект</p>
                     </div>
                 </div>
 
-                <!-- 5. Mini (Концептуальний) -->
-                <div class="project-card bg-white shadow-md animate-on-scroll" data-category="conceptual">
-                    <div class="aspect-[4/3] overflow-hidden relative cursor-pointer group" onclick="openImageLightbox('assets/images/Mini.png', 'Модульний будинок Mini')">
-                        <img src="assets/images/Mini.png" alt="Модульний будинок Mini" class="project-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-project="mini" loading="lazy">
-                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <i class="fas fa-search-plus text-white text-3xl"></i>
-                        </div>
+                <!-- 5. Mini -->
+                <div class="project-card bg-white shadow-md animate-on-scroll cursor-pointer group" data-category="conceptual" onclick="openProject(4)">
+                    <div class="aspect-[4/3] overflow-hidden relative">
+                        <img src="assets/images/Mini.png" alt="Модульний будинок Mini" class="project-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-project="mini" loading="lazy">
+                        <div class="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     </div>
-                    <div class="p-6">
-                        <h4 class="text-xl font-bold mb-4">Модульний будинок Mini</h4>
-                        <button onclick="openPDFViewer('assets/documents/Mini.pdf', 'Модульний будинок Mini')" class="w-full bg-slate-100 hover:bg-accent hover:text-white py-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                            <i class="fas fa-drafting-compass"></i> Креслення
-                        </button>
+                    <div class="p-6 border-t border-slate-50">
+                        <h4 class="text-lg font-bold group-hover:text-accent transition-colors">Модульний будинок Mini</h4>
+                        <p class="text-xs text-slate-400 mt-1">Концептуальний проект</p>
                     </div>
                 </div>
 
-                <!-- 6. Офіс (Концептуальний) -->
-                <div class="project-card bg-white shadow-md animate-on-scroll" data-category="conceptual">
-                    <div class="aspect-[4/3] overflow-hidden relative cursor-pointer group" onclick="openImageLightbox('assets/images/Офіс.png', 'Модульний офіс')">
-                        <img src="assets/images/Офіс.png" alt="Модульний офіс" class="project-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-project="office" loading="lazy">
-                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <i class="fas fa-search-plus text-white text-3xl"></i>
-                        </div>
+                <!-- 6. Офіс -->
+                <div class="project-card bg-white shadow-md animate-on-scroll cursor-pointer group" data-category="conceptual" onclick="openProject(5)">
+                    <div class="aspect-[4/3] overflow-hidden relative">
+                        <img src="assets/images/Офіс.png" alt="Модульний офіс" class="project-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-project="office" loading="lazy">
+                        <div class="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     </div>
-                    <div class="p-6">
-                        <h4 class="text-xl font-bold mb-4">Модульний офіс</h4>
-                        <button onclick="openPDFViewer('assets/documents/Офіс.pdf', 'Модульний офіс')" class="w-full bg-slate-100 hover:bg-accent hover:text-white py-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                            <i class="fas fa-drafting-compass"></i> Креслення
-                        </button>
+                    <div class="p-6 border-t border-slate-50">
+                        <h4 class="text-lg font-bold group-hover:text-accent transition-colors">Модульний офіс</h4>
+                        <p class="text-xs text-slate-400 mt-1">Концептуальний проект</p>
                     </div>
                 </div>
 
-                <!-- 7. Госп.буд (Концептуальний) -->
-                <div class="project-card bg-white shadow-md animate-on-scroll" data-category="conceptual">
-                    <div class="aspect-[4/3] overflow-hidden relative cursor-pointer group" onclick="openImageLightbox('assets/images/Госп.буд.png', 'Господарський будиночок')">
-                        <img src="assets/images/Госп.буд.png" alt="Господарський будиночок" class="project-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-project="host" loading="lazy">
-                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <i class="fas fa-search-plus text-white text-3xl"></i>
-                        </div>
+                <!-- 7. Госп.буд -->
+                <div class="project-card bg-white shadow-md animate-on-scroll cursor-pointer group" data-category="conceptual" onclick="openProject(6)">
+                    <div class="aspect-[4/3] overflow-hidden relative">
+                        <img src="assets/images/Госп.буд.png" alt="Господарський будиночок" class="project-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-project="host" loading="lazy">
+                        <div class="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     </div>
-                    <div class="p-6">
-                        <h4 class="text-xl font-bold mb-4">Господарський будиночок</h4>
-                        <button onclick="openPDFViewer('assets/documents/Госп.буд.pdf', 'Господарський будиночок')" class="w-full bg-slate-100 hover:bg-accent hover:text-white py-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                            <i class="fas fa-drafting-compass"></i> Креслення
-                        </button>
+                    <div class="p-6 border-t border-slate-50">
+                        <h4 class="text-lg font-bold group-hover:text-accent transition-colors">Господарський будиночок</h4>
+                        <p class="text-xs text-slate-400 mt-1">Концептуальний проект</p>
                     </div>
                 </div>
 
-                <!-- 8. Котедж (Концептуальний) - ГАЛЕРЕЯ -->
-                <div class="project-card bg-white shadow-md animate-on-scroll" data-category="conceptual">
-                    <div class="aspect-[4/3] overflow-hidden relative cursor-pointer group" onclick="openCottageGallery()">
-                        <img src="assets/images/Котедж.png" alt="Котедж" class="project-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-project="cottage" loading="lazy">
-                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <i class="fas fa-images text-white text-3xl"></i>
-                        </div>
-                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold shadow-sm">
-                            Multi-view
+                <!-- 8. Котедж (Featured/Gallery) -->
+                <div class="project-card bg-white shadow-md animate-on-scroll cursor-pointer group" data-category="conceptual" onclick="openProject(7)">
+                    <div class="aspect-[4/3] overflow-hidden relative">
+                        <img src="assets/images/Котедж.png" alt="Котедж" class="project-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-project="cottage" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                            <span class="text-white text-xs font-bold uppercase tracking-widest flex items-center gap-2">
+                                <i class="fas fa-images"></i> Переглянути галерею (5 фото)
+                            </span>
                         </div>
                     </div>
-                    <div class="p-6">
-                        <h4 class="text-xl font-bold mb-4">Котедж</h4>
-                        <div class="grid grid-cols-2 gap-2">
-                            <button onclick="openCottageGallery()" class="bg-slate-100 hover:bg-accent hover:text-white py-3 rounded-xl font-bold transition-all flex flex-col items-center gap-1 text-xs">
-                                <i class="fas fa-images text-lg"></i> Фото
-                            </button>
-                            <button onclick="openPDFViewer('assets/documents/Котедж.pdf', 'Котедж')" class="bg-slate-100 hover:bg-accent hover:text-white py-3 rounded-xl font-bold transition-all flex flex-col items-center gap-1 text-xs">
-                                <i class="fas fa-file-pdf text-lg"></i> Креслення
-                            </button>
-                        </div>
+                    <div class="p-6 border-t border-slate-50">
+                        <h4 class="text-lg font-bold group-hover:text-accent transition-colors">Котедж</h4>
+                        <p class="text-xs text-slate-400 mt-1">Концептуальний проект • Розширена візуалізація</p>
                     </div>
                 </div>
 
-                <!-- 9. Церква (Робочий) -->
-                <div class="project-card bg-white shadow-md animate-on-scroll" data-category="working">
-                    <div class="aspect-[4/3] overflow-hidden relative cursor-pointer group" onclick="openImageLightbox('assets/images/Церква.png', 'Церква в Карпатах')">
-                        <img src="assets/images/Церква.png" alt="Церква в Карпатах" class="project-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-project="church" loading="lazy">
-                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <i class="fas fa-search-plus text-white text-3xl"></i>
-                        </div>
-                        <div class="absolute top-4 right-4 bg-accent text-white px-3 py-1 rounded-full text-xs font-bold shadow-sm">
-                            Робочий
-                        </div>
+                <!-- 9. Церква -->
+                <div class="project-card bg-white shadow-md animate-on-scroll cursor-pointer group" data-category="working" onclick="openProject(8)">
+                    <div class="aspect-[4/3] overflow-hidden relative">
+                        <img src="assets/images/Церква.png" alt="Церква в Карпатах" class="project-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-project="church" loading="lazy">
+                        <div class="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     </div>
-                    <div class="p-6">
-                        <h4 class="text-xl font-bold mb-4">Церква в Карпатах</h4>
-                        <button onclick="openPDFViewer('assets/documents/Церква.pdf', 'Церква в Карпатах')" class="w-full bg-slate-100 hover:bg-accent hover:text-white py-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                            <i class="fas fa-file-pdf"></i> Переглянути креслення
-                        </button>
+                    <div class="p-6 border-t border-slate-50">
+                        <h4 class="text-lg font-bold group-hover:text-accent transition-colors">Церква в Карпатах</h4>
+                        <p class="text-xs text-slate-400 mt-1">Робочий проект</p>
                     </div>
                 </div>
 
-                <!-- 10. ЖК Васильєва (Робочий) - БЕЗ ПРЕВЬЮ -->
-                <div class="project-card bg-white shadow-md animate-on-scroll" data-category="working">
-                    <div class="placeholder-image">
+                <!-- 10. ЖК Васильєва -->
+                <div class="project-card bg-white shadow-md animate-on-scroll cursor-pointer group" data-category="working" onclick="openProject(9)">
+                    <div class="placeholder-image bg-slate-100">
                         <i class="fas fa-city text-5xl text-slate-300"></i>
-                        <p class="mt-4 text-slate-500 font-medium">Зображення буде додано</p>
                     </div>
-                    <div class="p-6">
-                        <h4 class="text-xl font-bold mb-4">ЖК Васильєва</h4>
-                        <button onclick="openPDFViewer('assets/documents/ЖК Васильєва.pdf', 'ЖК Васильєва')" class="w-full bg-slate-100 hover:bg-accent hover:text-white py-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                            <i class="fas fa-drafting-compass"></i> Переглянути креслення
-                        </button>
+                    <div class="p-6 border-t border-slate-50">
+                        <h4 class="text-lg font-bold group-hover:text-accent transition-colors">ЖК Васильєва</h4>
+                        <p class="text-xs text-slate-400 mt-1">Робочий проект</p>
                     </div>
                 </div>
 
-                <!-- 11. ЖК Лісові гринівці (Робочий) -->
-                <div class="project-card bg-white shadow-md animate-on-scroll" data-category="working">
+                <!-- 11. ЖК Лісові гринівці -->
+                <div class="project-card bg-white shadow-md animate-on-scroll cursor-pointer group" data-category="working" onclick="openProject(10)">
                     <div class="aspect-[4/3] overflow-hidden relative bg-slate-100 flex items-center justify-center">
-                        <i class="fas fa-cube text-6xl text-slate-200"></i>
-                        <div class="absolute top-4 right-4 bg-accent text-white px-3 py-1 rounded-full text-xs font-bold shadow-sm">
-                            Робочий
-                        </div>
+                        <i class="fas fa-cube text-6xl text-slate-200 group-hover:scale-110 transition-transform duration-500"></i>
                     </div>
-                    <div class="p-6">
-                        <h4 class="text-xl font-bold mb-4">ЖК Лісові гринівці</h4>
-                        <button onclick="openPDFViewer('assets/documents/ЖК Лісові гринівці.pdf', 'ЖК Лісові гринівці')" class="w-full bg-slate-100 hover:bg-accent hover:text-white py-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                            <i class="fas fa-file-pdf"></i> Переглянути креслення
-                        </button>
+                    <div class="p-6 border-t border-slate-50">
+                        <h4 class="text-lg font-bold group-hover:text-accent transition-colors">ЖК Лісові гринівці</h4>
+                        <p class="text-xs text-slate-400 mt-1">Робочий проект</p>
                     </div>
                 </div>
 
