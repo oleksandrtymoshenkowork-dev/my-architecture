@@ -8,14 +8,14 @@ const projectsData = [
     {
         title: "Стадіон (Тернопіль)",
         type: "Концептуальний проект",
-        images: [],
+        images: ["assets/images/Стадіон.png"],
         pdf: "assets/documents/Стадіон.pdf",
         category: "conceptual"
     },
     {
         title: "Генплан ЖК (Вінниця)",
         type: "Концептуальний проект",
-        images: [],
+        images: ["assets/images/ГП.png"],
         pdf: "assets/documents/Генплан Вінниця.pdf",
         category: "conceptual"
     },
@@ -77,14 +77,14 @@ const projectsData = [
     {
         title: "ЖК Васильєва",
         type: "Робочий проект",
-        images: [],
+        images: ["assets/images/ЖК Васильева.png"],
         pdf: "assets/documents/ЖК Васильєва.pdf",
         category: "working"
     },
     {
         title: "ЖК Лісові гринівці",
         type: "Робочий проект",
-        images: [],
+        images: ["assets/images/ЖК Лісові гринівці.png"],
         pdf: "assets/documents/ЖК Лісові гринівці.pdf",
         category: "working"
     }
@@ -192,6 +192,13 @@ function renderProjectModal() {
     const hasImages = project.images && project.images.length > 0;
     const isGallery = project.images && project.images.length > 1;
 
+    // Путь к текущему изображению (энкодим для корректной работы с кириллицей)
+    const rawImgPath = hasImages ? project.images[currentImageIndex] : '';
+    const currentImgPath = encodeURI(rawImgPath);
+    
+    // Специальная обработка для План.png - заставляем его вписываться полностью
+    const isPlan = rawImgPath.includes('План.png');
+
     container.innerHTML = `
         <div class="bg-slate-900 rounded-[2rem] w-full h-[95vh] flex flex-col overflow-hidden shadow-2xl animate-fade-in-up border border-white/10 relative">
             
@@ -203,12 +210,12 @@ function renderProjectModal() {
                 </div>
                 <div class="flex items-center gap-4">
                     ${project.pdf ? `
-                        <button onclick="openPDFInsideModal('${project.pdf}')" class="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 border border-white/10">
-                            <i class="fas fa-file-pdf"></i> Креслення
+                        <button onclick="openPDFInsideModal('${encodeURI(project.pdf)}')" class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-xl text-sm font-bold transition-all flex items-center gap-3 border border-blue-400 shadow-lg shadow-blue-900/40">
+                            <i class="fas fa-file-pdf text-lg"></i> Креслення
                         </button>
                     ` : ''}
-                    <button onclick="closeMainModal()" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-all text-white">
-                        <i class="fas fa-times"></i>
+                    <button onclick="closeMainModal()" class="w-12 h-12 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-all text-white">
+                        <i class="fas fa-times text-xl"></i>
                     </button>
                 </div>
             </div>
@@ -222,7 +229,10 @@ function renderProjectModal() {
                 
                 <div id="project-media-container" class="w-full h-full flex items-center justify-center animate-fade-in">
                     ${hasImages ? `
-                        <img src="${project.images[currentImageIndex]}" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl transition-all duration-500" id="main-project-image">
+                        <img src="${currentImgPath}" 
+                             class="${isPlan ? 'max-w-full max-h-full object-contain' : 'max-w-full max-h-full object-contain'} rounded-lg shadow-2xl transition-all duration-500" 
+                             style="${isPlan ? 'transform: scale(0.9);' : ''}"
+                             id="main-project-image">
                     ` : `
                         <div class="text-center text-slate-500">
                             <i class="fas fa-camera-retro text-6xl mb-4 opacity-20"></i>
@@ -251,7 +261,7 @@ function renderProjectModal() {
                 <div class="p-6 bg-slate-950/50 flex justify-center gap-3 overflow-x-auto border-t border-white/5">
                     ${project.images.map((img, idx) => `
                         <div onclick="setProjectImage(${idx})" class="w-16 h-16 rounded-lg overflow-hidden cursor-pointer transition-all border-2 ${idx === currentImageIndex ? 'border-blue-400 scale-110 shadow-lg' : 'border-transparent opacity-40 hover:opacity-100'}">
-                            <img src="${img}" class="w-full h-full object-cover">
+                            <img src="${encodeURI(img)}" class="w-full h-full object-cover">
                         </div>
                     `).join('')}
                 </div>
@@ -286,32 +296,19 @@ function prevImage(e) {
     if (e) e.stopPropagation();
     const project = projectsData[currentProjectIndex];
     currentImageIndex = (currentImageIndex - 1 + project.images.length) % project.images.length;
-    updateProjectImage();
+    renderProjectModal();
 }
 
 function nextImage(e) {
     if (e) e.stopPropagation();
     const project = projectsData[currentProjectIndex];
     currentImageIndex = (currentImageIndex + 1) % project.images.length;
-    updateProjectImage();
+    renderProjectModal();
 }
 
 function setProjectImage(idx) {
     currentImageIndex = idx;
-    updateProjectImage();
-}
-
-function updateProjectImage() {
-    const project = projectsData[currentProjectIndex];
-    const imgElement = document.getElementById('main-project-image');
-    if (imgElement) {
-        imgElement.style.opacity = '0';
-        setTimeout(() => {
-            imgElement.src = project.images[currentImageIndex];
-            imgElement.style.opacity = '1';
-            renderProjectModal(); // Полный перерендер для обновления счетчика и миниатюр
-        }, 150);
-    }
+    renderProjectModal();
 }
 
 function openPDFInsideModal(path) {

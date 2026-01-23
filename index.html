@@ -254,6 +254,15 @@
                                     <div class="bg-accent h-2.5 rounded-full" style="width: 40%"></div>
                                 </div>
                             </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="font-medium">Revit</span>
+                                    <span class="text-slate-500">3/10</span>
+                                </div>
+                                <div class="w-full bg-slate-200 rounded-full h-2.5">
+                                    <div class="bg-accent h-2.5 rounded-full" style="width: 30%"></div>
+                                </div>
+                            </div>
                         </div>
                         
                         <!-- Дополнительные инструменты -->
@@ -308,9 +317,9 @@
                 
                 <!-- 1. Стадіон -->
                 <div class="project-card bg-white shadow-md animate-on-scroll cursor-pointer group" data-category="conceptual" onclick="openProject(0)">
-                    <div class="placeholder-image">
-                        <i class="fas fa-building text-5xl text-slate-300"></i>
-                        <p class="mt-4 text-slate-500 font-medium">Стадіон (Тернопіль)</p>
+                    <div class="aspect-[4/3] overflow-hidden relative">
+                        <img src="assets/images/Стадіон.png" alt="Стадіон (Тернопіль)" class="project-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
+                        <div class="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     </div>
                     <div class="p-6 border-t border-slate-50">
                         <h4 class="text-lg font-bold group-hover:text-accent transition-colors">Стадіон (Тернопіль)</h4>
@@ -318,11 +327,11 @@
                     </div>
                 </div>
 
-                <!-- 2. Генплан Вінниця -->
+                <!-- 2. Генплан ЖК -->
                 <div class="project-card bg-white shadow-md animate-on-scroll cursor-pointer group" data-category="conceptual" onclick="openProject(1)">
-                    <div class="placeholder-image">
-                        <i class="fas fa-map-marked-alt text-5xl text-slate-300"></i>
-                        <p class="mt-4 text-slate-500 font-medium">Генплан ЖК (Вінниця)</p>
+                    <div class="aspect-[4/3] overflow-hidden relative">
+                        <img src="assets/images/ГП.png" alt="Генплан ЖК (Вінниця)" class="project-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
+                        <div class="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     </div>
                     <div class="p-6 border-t border-slate-50">
                         <h4 class="text-lg font-bold group-hover:text-accent transition-colors">Генплан ЖК (Вінниця)</h4>
@@ -420,8 +429,9 @@
 
                 <!-- 10. ЖК Васильєва -->
                 <div class="project-card bg-white shadow-md animate-on-scroll cursor-pointer group" data-category="working" onclick="openProject(9)">
-                    <div class="placeholder-image bg-slate-100">
-                        <i class="fas fa-city text-5xl text-slate-300"></i>
+                    <div class="aspect-[4/3] overflow-hidden relative">
+                        <img src="assets/images/ЖК Васильева.png" alt="ЖК Васильєва" class="project-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
+                        <div class="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     </div>
                     <div class="p-6 border-t border-slate-50">
                         <h4 class="text-lg font-bold group-hover:text-accent transition-colors">ЖК Васильєва</h4>
@@ -431,8 +441,9 @@
 
                 <!-- 11. ЖК Лісові гринівці -->
                 <div class="project-card bg-white shadow-md animate-on-scroll cursor-pointer group" data-category="working" onclick="openProject(10)">
-                    <div class="aspect-[4/3] overflow-hidden relative bg-slate-100 flex items-center justify-center">
-                        <i class="fas fa-cube text-6xl text-slate-200 group-hover:scale-110 transition-transform duration-500"></i>
+                    <div class="aspect-[4/3] overflow-hidden relative">
+                        <img src="assets/images/ЖК Лісові гринівці.png" alt="ЖК Лісові гринівці" class="project-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
+                        <div class="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     </div>
                     <div class="p-6 border-t border-slate-50">
                         <h4 class="text-lg font-bold group-hover:text-accent transition-colors">ЖК Лісові гринівці</h4>
@@ -454,45 +465,42 @@
                         Якщо вам потрібен архітектор, який не боїться складних завдань та прагне до інновацій — я відкритий до пропозицій.
                     </p>
                     
-                    <div class="flex flex-col gap-6 max-w-md mx-auto text-left">
-                        <!-- Элементы контактов с выравниванием по одной линии через Flexbox -->
+                    <div class="flex flex-col lg:flex-row gap-6 max-w-6xl mx-auto justify-center">
+                        <!-- Элементы контактов -->
                         
                         <!-- Email -->
-                        <div class="flex items-center gap-4 bg-white/5 p-5 rounded-2xl border border-white/10 hover:border-blue-400/50 transition-all group cursor-pointer" 
+                        <div class="flex-1 flex items-center gap-4 bg-white/5 p-6 rounded-2xl border border-white/10 hover:border-blue-400/50 transition-all group cursor-pointer" 
                              onclick="copyToClipboard('oleksandr.tymoshenko.work@gmail.com', 'Email скопійовано!')">
-                            <div class="w-12 h-12 bg-blue-400/10 rounded-xl flex items-center justify-center group-hover:bg-blue-400 transition-all shrink-0">
-                                <i class="fas fa-envelope text-xl text-blue-400 group-hover:text-white"></i>
+                            <div class="w-14 h-14 bg-blue-400/10 rounded-xl flex items-center justify-center group-hover:bg-blue-400 transition-all shrink-0">
+                                <i class="fas fa-envelope text-2xl text-blue-400 group-hover:text-white"></i>
                             </div>
-                            <div class="flex-1 overflow-hidden">
-                                <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Напишіть мені</p>
-                                <p class="text-sm md:text-base font-medium truncate">oleksandr.tymoshenko.work@gmail.com</p>
+                            <div class="text-left overflow-hidden">
+                                <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Email</p>
+                                <p class="text-sm font-medium truncate">oleksandr.tymoshenko.work@gmail.com</p>
                             </div>
-                            <i class="fas fa-copy text-slate-600 group-hover:text-white text-xs"></i>
                         </div>
 
                         <!-- Telegram -->
-                        <a href="https://t.me/Tymoshenko_official" target="_blank" class="flex items-center gap-4 bg-white/5 p-5 rounded-2xl border border-white/10 hover:border-blue-400/50 transition-all group">
-                            <div class="w-12 h-12 bg-blue-400/10 rounded-xl flex items-center justify-center group-hover:bg-blue-400 transition-all shrink-0">
-                                <i class="fab fa-telegram-plane text-xl text-blue-400 group-hover:text-white"></i>
+                        <a href="https://t.me/Tymoshenko_official" target="_blank" class="flex-1 flex items-center gap-4 bg-white/5 p-6 rounded-2xl border border-white/10 hover:border-blue-400/50 transition-all group">
+                            <div class="w-14 h-14 bg-blue-400/10 rounded-xl flex items-center justify-center group-hover:bg-blue-400 transition-all shrink-0">
+                                <i class="fab fa-telegram-plane text-2xl text-blue-400 group-hover:text-white"></i>
                             </div>
-                            <div class="flex-1">
+                            <div class="text-left">
                                 <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Телеграм</p>
-                                <p class="text-base md:text-lg font-bold">@Tymoshenko_official</p>
+                                <p class="text-lg font-bold">@Tymoshenko_official</p>
                             </div>
-                            <i class="fas fa-external-link-alt text-slate-600 group-hover:text-white text-xs"></i>
                         </a>
 
                         <!-- Phone -->
-                        <div class="flex items-center gap-4 bg-white/5 p-5 rounded-2xl border border-white/10 hover:border-blue-400/50 transition-all group cursor-pointer"
+                        <div class="flex-1 flex items-center gap-4 bg-white/5 p-6 rounded-2xl border border-white/10 hover:border-blue-400/50 transition-all group cursor-pointer"
                              onclick="copyToClipboard('+380630199204', 'Номер скопійовано!')">
-                            <div class="w-12 h-12 bg-blue-400/10 rounded-xl flex items-center justify-center group-hover:bg-blue-400 transition-all shrink-0">
-                                <i class="fas fa-phone text-xl text-blue-400 group-hover:text-white"></i>
+                            <div class="w-14 h-14 bg-blue-400/10 rounded-xl flex items-center justify-center group-hover:bg-blue-400 transition-all shrink-0">
+                                <i class="fas fa-phone text-2xl text-blue-400 group-hover:text-white"></i>
                             </div>
-                            <div class="flex-1">
-                                <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Дзвінок</p>
-                                <p class="text-base md:text-lg font-bold">+38 063 01 99 204</p>
+                            <div class="text-left">
+                                <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Телефон</p>
+                                <p class="text-lg font-bold">+38 063 01 99 204</p>
                             </div>
-                            <i class="fas fa-copy text-slate-600 group-hover:text-white text-xs"></i>
                         </div>
                     </div>
                 </div>
