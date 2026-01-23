@@ -1,428 +1,382 @@
-// Project Data
-const projects = {
-    'working-1': {
-        title: 'Церква в Карпатах',
-        category: 'Робочий проект / Культова споруда',
-        description: 'Проект церкви в Карпатському регіоні. Робота включала розробку архітектурної концепції, деталізацію фасадів та підготовку повного пакету креслень.',
-        images: ['assets/images/Церква.png'],
-        drawings: 'assets/documents/Церква.pdf'
-    },
-    'working-2': {
-        title: 'ЖК Васильєва',
-        category: 'Робочий проект / Житлова забудова',
-        description: 'Розробка робочої документації для житлового комплексу. Фокус на функціональності планувань та відповідності будівельним нормам.',
-        images: [],
-        drawings: 'assets/documents/ЖК Васильева.pdf'
-    },
-    'working-3': {
-        title: 'ЖК Лісові гринівці',
-        category: 'Робочий проект / BIM моделювання',
-        description: 'Комплексний проект житлового комплексу з використанням BIM технологій. Створення інформаційної моделі будівлі для оптимізації процесів будівництва.',
-        images: [],
-        drawings: 'assets/documents/ЖК Лісові гринівці.pdf',
-        bimx: 'assets/bim/ЖК Лісові гринівці.bimx'
-    },
-    'conc-1': {
-        title: 'Стадіон в м. Тернопіль',
-        category: 'Концептуальний проект / Громадська споруда',
-        description: 'Концепція сучасного стадіону з акцентом на ергономіку та інтеграцію в міське середовище.',
-        images: [],
-        drawings: 'assets/documents/Стадіон.pdf'
-    },
-    'conc-2': {
-        title: 'Генеральний план ЖК в м. Вінниця',
-        category: 'Концептуальний проект / Містобудування',
-        description: 'Розробка генерального плану житлового комплексу з врахуванням ландшафту та створення комфортного пішохідного середовища.',
-        images: [],
-        drawings: 'assets/documents/ГП.pdf'
-    },
-    'conc-3': {
-        title: 'Однородинний будинок',
-        category: 'Концептуальний проект / Приватне житло',
-        description: 'Сучасний однородинний будинок з панорамним склінням та відкритим плануванням.',
-        images: ['assets/images/Однородинний.png'],
-        drawings: 'assets/documents/Однородинний.pdf'
-    },
-    'conc-4': {
-        title: 'Модульний будинок Maxi',
-        category: 'Концептуальний проект / Модульне будівництво',
-        description: 'Проект енергоефективного модульного будинку великої площі. Швидке зведення та висока якість матеріалів.',
-        images: ['assets/images/Maxi.png'],
-        drawings: 'assets/documents/Maxi.pdf'
-    },
-    'conc-5': {
-        title: 'Модульний будинок Mini',
-        category: 'Концептуальний проект / Модульне будівництво',
-        description: 'Компактний модульний будинок для відпочинку або гостьового проживання.',
-        images: ['assets/images/Mini.png'],
-        drawings: 'assets/documents/Mini.pdf'
-    },
-    'conc-6': {
-        title: 'Модульний офіс',
-        category: 'Концептуальний проект / Комерційна архітектура',
-        description: 'Сучасний простір для роботи, що може бути легко адаптований під різні потреби бізнесу.',
-        images: ['assets/images/Офіс.png'],
-        drawings: 'assets/documents/Офіс.pdf'
-    },
-    'conc-7': {
-        title: 'Господарський будиночок',
-        category: 'Концептуальний проект / Мала архітектурна форма',
-        description: 'Естетична та функціональна господарська споруда, що доповнює основний ансамбль забудови.',
-        images: ['assets/images/Госп.буд.png'],
-        drawings: 'assets/documents/Госп.буд.pdf'
-    },
-    'conc-8': {
-        title: 'Котедж',
-        category: 'Концептуальний проект / Приватне житло',
-        description: 'Детально опрацьований проект котеджу, що включає інтер\'єрні рішення та детальні конструктивні схеми.',
-        images: [
-            'assets/images/Котедж.png',
-            'assets/images/Вид_1.png',
-            'assets/images/Вид_2.png'
-        ],
-        drawings: 'assets/documents/Котедж.pdf',
-        schemes: [
-            'assets/images/3д.png',
-            'assets/images/План.png'
-        ]
-    }
-};
+/**
+ * ════════════════════════════════════════════════════════════════
+ * ГЛОБАЛЬНЫЕ НАСТРОЙКИ И ИНИЦИАЛИЗАЦИЯ
+ * ════════════════════════════════════════════════════════════════
+ */
 
-let currentGalleryImages = [];
-let currentImageIndex = 0;
-
-// Navbar Scroll Effect
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        navbar.classList.add('shadow-lg', 'bg-white/95');
-        navbar.classList.remove('bg-white/80');
-    } else {
-        navbar.classList.remove('shadow-lg', 'bg-white/95');
-        navbar.classList.add('bg-white/80');
-    }
-});
-
-// Mobile Menu Toggle
-const mobileMenuButton = document.getElementById('mobile-menu-button');
-const mobileMenu = document.getElementById('mobile-menu');
-
-mobileMenuButton.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
-    const icon = mobileMenuButton.querySelector('i');
-    icon.classList.toggle('fa-bars');
-    icon.classList.toggle('fa-times');
-});
-
-// Close mobile menu on link click
-document.querySelectorAll('#mobile-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
-        const icon = mobileMenuButton.querySelector('i');
-        icon.classList.add('fa-bars');
-        icon.classList.remove('fa-times');
-    });
-});
-
-// Portfolio Switching
-function switchPortfolio(category) {
-    const workingGrid = document.getElementById('grid-working');
-    const conceptualGrid = document.getElementById('grid-conceptual');
-    const workingTab = document.getElementById('tab-working');
-    const conceptualTab = document.getElementById('tab-conceptual');
-
-    if (category === 'working') {
-        workingGrid.classList.remove('hidden');
-        conceptualGrid.classList.add('hidden');
-        workingTab.classList.add('bg-white', 'shadow-sm', 'text-accent');
-        workingTab.classList.remove('text-slate-500');
-        conceptualTab.classList.remove('bg-white', 'shadow-sm', 'text-accent');
-        conceptualTab.classList.add('text-slate-500');
-    } else {
-        workingGrid.classList.add('hidden');
-        conceptualGrid.classList.remove('hidden');
-        conceptualTab.classList.add('bg-white', 'shadow-sm', 'text-accent');
-        conceptualTab.classList.remove('text-slate-500');
-        workingTab.classList.remove('bg-white', 'shadow-sm', 'text-accent');
-        workingTab.classList.add('text-slate-500');
-    }
-}
-
-// Modal Logic
-const modal = document.getElementById('project-modal');
-const modalContent = document.getElementById('modal-content');
-const modalImg = document.getElementById('modal-img-main');
-const modalTitle = document.getElementById('modal-title');
-const modalCategory = document.getElementById('modal-category');
-const modalDesc = document.getElementById('modal-description');
-const modalFiles = document.getElementById('modal-files');
-const galleryNav = document.getElementById('gallery-nav');
-
-function openModal(projectId) {
-    const project = projects[projectId];
-    if (!project) return;
-
-    modalTitle.innerText = project.title;
-    modalCategory.innerText = project.category;
-    modalDesc.innerText = project.description;
-
-    // Reset Gallery
-    currentGalleryImages = project.images;
-    currentImageIndex = 0;
+document.addEventListener('DOMContentLoaded', () => {
+    // Инициализация всех функций при загрузке страницы
+    initNavbar();
+    initMobileMenu();
+    initScrollAnimations();
+    initScrollProgress();
+    initScrollToTop();
     
-    if (currentGalleryImages.length > 0) {
-        modalImg.src = currentGalleryImages[0];
-        modalImg.classList.remove('hidden');
-        if (currentGalleryImages.length > 1) {
-            galleryNav.classList.remove('hidden');
-            galleryNav.classList.add('flex');
+    // По умолчанию показываем все проекты
+    filterProjects('all');
+});
+
+/**
+ * ════════════════════════════════════════════════════════════════
+ * НАВИГАЦИЯ И МЕНЮ
+ * ════════════════════════════════════════════════════════════════
+ */
+
+// Эффекты навигационной панели при прокрутке
+function initNavbar() {
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('shadow-lg', 'bg-white/95', 'py-1');
+            navbar.classList.remove('bg-white/80', 'py-0');
         } else {
-            galleryNav.classList.add('hidden');
-            galleryNav.classList.remove('flex');
+            navbar.classList.remove('shadow-lg', 'bg-white/95', 'py-1');
+            navbar.classList.add('bg-white/80', 'py-0');
         }
-    } else {
-        modalImg.classList.add('hidden');
-        galleryNav.classList.add('hidden');
-        galleryNav.classList.remove('flex');
-    }
-
-    // Populate Actions (View buttons instead of just downloads)
-    modalFiles.innerHTML = '';
-    
-    // PDF Drawing View Button
-    if (project.drawings) {
-        const btn = document.createElement('button');
-        btn.className = 'flex items-center justify-between w-full p-4 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl transition-all group';
-        btn.onclick = () => openPDFViewer(project.drawings, project.title);
-        btn.innerHTML = `
-            <div class="flex items-center gap-3">
-                <i class="fas fa-drafting-compass text-accent text-xl"></i>
-                <span class="font-medium text-slate-700">📐 Переглянути креслення</span>
-            </div>
-            <i class="fas fa-external-link-alt text-slate-300 group-hover:text-accent transition-colors"></i>
-        `;
-        modalFiles.appendChild(btn);
-    }
-
-    // Schemes View Button (Specific for Cottage)
-    if (project.schemes) {
-        const btn = document.createElement('button');
-        btn.className = 'flex items-center justify-between w-full p-4 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl transition-all group mt-2';
-        btn.onclick = () => openSchemeViewer(project.schemes, project.title);
-        btn.innerHTML = `
-            <div class="flex items-center gap-3">
-                <i class="fas fa-chart-area text-accent text-xl"></i>
-                <span class="font-medium text-slate-700">📊 Переглянути схеми</span>
-            </div>
-            <i class="fas fa-layer-group text-slate-300 group-hover:text-accent transition-colors"></i>
-        `;
-        modalFiles.appendChild(btn);
-    }
-
-    // BIMX/3D View Button
-    if (project.bimx) {
-        const btn = document.createElement('button');
-        btn.className = 'flex items-center justify-between w-full p-4 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl transition-all group mt-2';
-        btn.onclick = () => open3DViewer(project.bimx, project.title);
-        btn.innerHTML = `
-            <div class="flex items-center gap-3">
-                <i class="fas fa-cube text-accent text-xl"></i>
-                <span class="font-medium text-slate-700">🏗️ Переглянути 3D модель</span>
-            </div>
-            <i class="fas fa-vr-cardboard text-slate-300 group-hover:text-accent transition-colors"></i>
-        `;
-        modalFiles.appendChild(btn);
-    }
-
-    // Show Modal
-    modal.classList.remove('hidden');
-    setTimeout(() => {
-        modalContent.classList.add('show');
-        modalContent.classList.remove('opacity-0', 'translate-y-4');
-    }, 10);
-    document.body.style.overflow = 'hidden'; // Prevent scroll
+    });
 }
 
-function closeModal() {
-    modalContent.classList.remove('show');
-    modalContent.classList.add('opacity-0', 'translate-y-4');
-    setTimeout(() => {
-        modal.classList.add('hidden');
-        document.body.style.overflow = '';
-    }, 300);
+// Управление мобильным меню
+function initMobileMenu() {
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        const icon = mobileMenuButton.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+    });
+
+    // Закрытие меню при клике на ссылку
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            const icon = mobileMenuButton.querySelector('i');
+            icon.classList.add('fa-bars');
+            icon.classList.remove('fa-times');
+        });
+    });
 }
 
-// PDF Viewer
-function openPDFViewer(pdfPath, projectName) {
-  const viewer = document.createElement('div');
-  viewer.className = 'fixed inset-0 bg-slate-900/95 z-[200] flex items-center justify-center p-4 animate-fade-in';
-  viewer.innerHTML = `
-    <div class="bg-white rounded-3xl w-full max-w-6xl h-[90vh] flex flex-col overflow-hidden shadow-2xl transform transition-all">
-      <div class="flex justify-between items-center p-6 border-b border-slate-100">
-        <div>
-            <h3 class="text-xl font-bold text-slate-900">${projectName}</h3>
-            <p class="text-xs text-slate-500 uppercase tracking-widest font-bold">Архітектурні креслення</p>
-        </div>
-        <button onclick="this.closest('.fixed').remove()" 
-                class="w-10 h-10 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center transition-colors">
-          <i class="fas fa-times text-slate-500"></i>
-        </button>
-      </div>
-      <iframe src="${pdfPath}" 
-              class="flex-1 w-full bg-slate-50" 
-              frameborder="0">
-      </iframe>
-      <div class="p-6 border-t border-slate-100 flex justify-end gap-4 bg-slate-50/50">
-        <a href="${pdfPath}" 
-           download 
-           class="px-6 py-3 bg-accent text-white rounded-full font-bold hover:bg-blue-800 transition-all flex items-center gap-2 shadow-lg shadow-accent/20">
-          <i class="fas fa-download text-sm"></i> Завантажити PDF
-        </a>
-      </div>
-    </div>
-  `;
-  document.body.appendChild(viewer);
+/**
+ * ════════════════════════════════════════════════════════════════
+ * ФУНКЦИИ КОПИРОВАНИЯ И УВЕДОМЛЕНИЙ
+ * ════════════════════════════════════════════════════════════════
+ */
+
+/**
+ * Копирует текст в буфер обмена и показывает уведомление
+ * @param {string} text - Текст для копирования
+ * @param {string} message - Сообщение для показа пользователю
+ */
+function copyToClipboard(text, message = 'Скопійовано!') {
+    // Используем современный Clipboard API
+    navigator.clipboard.writeText(text).then(() => {
+        showTooltip(message);
+    }).catch(err => {
+        console.error('Помилка копіювання:', err);
+        showTooltip('Помилка копіювання', 'error');
+    });
 }
 
-// Scheme Viewer (Gallery for PNG schemes)
-function openSchemeViewer(schemes, projectName) {
-    let index = 0;
-    const viewer = document.createElement('div');
-    viewer.className = 'fixed inset-0 bg-slate-900/95 z-[200] flex items-center justify-center p-4 animate-fade-in';
-    
-    const updateImage = () => {
-        viewer.querySelector('#scheme-img').src = schemes[index];
-        viewer.querySelector('#scheme-counter').innerText = `${index + 1} / ${schemes.length}`;
-    };
+/**
+ * Показывает всплывающее уведомление в углу экрана
+ */
+function showTooltip(message, type = 'success') {
+    // Удаляем старые уведомления, если они есть
+    const oldTooltips = document.querySelectorAll('.custom-tooltip');
+    oldTooltips.forEach(t => t.remove());
 
-    viewer.innerHTML = `
-      <div class="bg-white rounded-3xl w-full max-w-5xl h-[85vh] flex flex-col overflow-hidden shadow-2xl">
-        <div class="flex justify-between items-center p-6 border-b border-slate-100">
-          <div>
-              <h3 class="text-xl font-bold text-slate-900">${projectName}</h3>
-              <p class="text-xs text-slate-500 uppercase tracking-widest font-bold">Схеми та плани</p>
-          </div>
-          <div class="flex items-center gap-6">
-              <span id="scheme-counter" class="text-sm font-bold text-slate-400">1 / ${schemes.length}</span>
-              <button onclick="this.closest('.fixed').remove()" 
-                      class="w-10 h-10 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center transition-colors">
-                <i class="fas fa-times text-slate-500"></i>
-              </button>
-          </div>
-        </div>
-        <div class="flex-1 bg-slate-100 flex items-center justify-center relative overflow-hidden p-8">
-            <button id="prev-scheme" class="absolute left-6 w-12 h-12 bg-white/90 hover:bg-white rounded-full shadow-xl flex items-center justify-center transition-all z-10">
-                <i class="fas fa-chevron-left text-slate-800"></i>
-            </button>
-            <img id="scheme-img" src="${schemes[0]}" class="max-w-full max-h-full object-contain rounded-lg shadow-sm">
-            <button id="next-scheme" class="absolute right-6 w-12 h-12 bg-white/90 hover:bg-white rounded-full shadow-xl flex items-center justify-center transition-all z-10">
-                <i class="fas fa-chevron-right text-slate-800"></i>
-            </button>
-        </div>
-      </div>
-    `;
-
-    viewer.querySelector('#next-scheme').onclick = () => {
-        index = (index + 1) % schemes.length;
-        updateImage();
-    };
-    viewer.querySelector('#prev-scheme').onclick = () => {
-        index = (index - 1 + schemes.length) % schemes.length;
-        updateImage();
-    };
-
-    document.body.appendChild(viewer);
-}
-
-// 3D Viewer Placeholder/Message
-function open3DViewer(bimxPath, projectName) {
-    const viewer = document.createElement('div');
-    viewer.className = 'fixed inset-0 bg-slate-900/95 z-[200] flex items-center justify-center p-4 animate-fade-in';
-    viewer.innerHTML = `
-      <div class="bg-white rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl p-12 text-center">
-        <div class="w-24 h-24 bg-blue-100 text-accent rounded-full flex items-center justify-center mx-auto mb-8">
-            <i class="fas fa-cube text-5xl"></i>
-        </div>
-        <h3 class="text-3xl font-bold text-slate-900 mb-4">${projectName}</h3>
-        <p class="text-slate-600 text-lg mb-8 leading-relaxed">
-            3D модель доступна для перегляду. Для повного функціоналу та найкращого досвіду рекомендуємо використовувати <strong>BIMx Viewer</strong>.
-        </p>
-        <div class="flex flex-col gap-4">
-            <a href="${bimxPath}" download class="w-full py-4 bg-accent text-white rounded-full font-bold hover:bg-blue-800 transition-all shadow-lg shadow-accent/20">
-                📥 Завантажити BIMx модель
-            </a>
-            <button onclick="this.closest('.fixed').remove()" class="w-full py-4 border-2 border-slate-100 text-slate-500 rounded-full font-bold hover:bg-slate-50 transition-all">
-                Закрити
-            </button>
-        </div>
-        <p class="mt-6 text-xs text-slate-400">
-            *Для перегляду .bimx файлів на мобільних пристроях або ПК встановіть безкоштовний додаток Graphisoft BIMx.
-        </p>
-      </div>
-    `;
-    document.body.appendChild(viewer);
-}
-
-// Copy to Clipboard with Tooltip
-function copyToClipboard(text) {
-  navigator.clipboard.writeText(text).then(() => {
     const tooltip = document.createElement('div');
-    tooltip.className = 'fixed top-10 left-1/2 -translate-x-1/2 bg-green-500 text-white px-8 py-4 rounded-full shadow-2xl z-[300] font-bold flex items-center gap-3 animate-fade-in-up';
-    tooltip.innerHTML = `<i class="fas fa-check-circle"></i> Номер скопійовано!`;
+    const bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
+    
+    // Стилизуем уведомление
+    tooltip.className = `fixed top-6 right-6 ${bgColor} text-white px-8 py-4 rounded-2xl shadow-2xl z-[200] font-bold flex items-center gap-3 animate-fade-in custom-tooltip`;
+    tooltip.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i> ${message}`;
+    
     document.body.appendChild(tooltip);
     
+    // Удаляем уведомление через 2.5 секунды
     setTimeout(() => {
-        tooltip.classList.add('opacity-0', 'translate-y-2');
-        setTimeout(() => tooltip.remove(), 500);
-    }, 2000);
-  }).catch(err => {
-    console.error('Помилка копіювання:', err);
-  });
+        tooltip.classList.add('animate-fade-out');
+        setTimeout(() => tooltip.remove(), 300);
+    }, 2500);
 }
 
-// Gallery Navigation
-document.getElementById('next-img').addEventListener('click', (e) => {
-    e.stopPropagation();
-    currentImageIndex = (currentImageIndex + 1) % currentGalleryImages.length;
-    modalImg.src = currentGalleryImages[currentImageIndex];
-});
+/**
+ * ════════════════════════════════════════════════════════════════
+ * ПОРТФОЛИО И ФИЛЬТРАЦИЯ
+ * ════════════════════════════════════════════════════════════════
+ */
 
-document.getElementById('prev-img').addEventListener('click', (e) => {
-    e.stopPropagation();
-    currentImageIndex = (currentImageIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length;
-    modalImg.src = currentGalleryImages[currentImageIndex];
-});
-
-// Scroll Reveal Observer
-const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
+/**
+ * Фильтрует карточки проектов по категориям
+ * @param {string} category - 'all', 'conceptual', 'working'
+ */
+function filterProjects(category) {
+    // Находим все кнопки фильтров
+    const buttons = document.querySelectorAll('.filter-btn');
+    
+    // Сбрасываем и обновляем активное состояние кнопок
+    buttons.forEach(btn => {
+        if (btn.getAttribute('data-filter') === category) {
+            btn.classList.add('active', 'bg-accent', 'text-white');
+            btn.classList.remove('bg-white', 'text-slate-600');
+        } else {
+            btn.classList.remove('active', 'bg-accent', 'text-white');
+            btn.classList.add('bg-white', 'text-slate-600');
         }
     });
-}, { threshold: 0.1 });
+    
+    // Показываем или скрываем карточки проектов
+    const projects = document.querySelectorAll('.project-card');
+    projects.forEach(project => {
+        const projectCategory = project.getAttribute('data-category');
+        
+        if (category === 'all') {
+            project.style.display = 'block';
+            project.classList.add('animate-fade-in');
+        } else {
+            if (projectCategory === category) {
+                project.style.display = 'block';
+                project.classList.add('animate-fade-in');
+            } else {
+                project.style.display = 'none';
+                project.classList.remove('animate-fade-in');
+            }
+        }
+    });
+}
 
-document.querySelectorAll('.fade-in').forEach(el => {
-    revealObserver.observe(el);
-});
+/**
+ * ════════════════════════════════════════════════════════════════
+ * МОДАЛЬНЫЕ ОКНА И ПРОСМОТР PDF
+ * ════════════════════════════════════════════════════════════════
+ */
 
-// Lazy Loading Enhancement
-document.addEventListener("DOMContentLoaded", function() {
-    var lazyImages = [].slice.call(document.querySelectorAll("img[loading='lazy']"));
+/**
+ * Открывает улучшенный просмотрщик PDF
+ */
+function openPDFViewer(pdfPath, projectName) {
+    const modal = document.getElementById('main-modal');
+    const container = document.getElementById('modal-container');
+    
+    // Очищаем и создаем структуру просмотрщика
+    container.innerHTML = `
+        <div class="bg-white rounded-[2rem] w-full h-[95vh] flex flex-col overflow-hidden shadow-2xl animate-fade-in-up">
+            <!-- Шапка окна -->
+            <div class="flex justify-between items-center p-6 border-b bg-slate-50">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-accent/10 text-accent rounded-xl flex items-center justify-center">
+                        <i class="fas fa-file-pdf text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">${projectName}</h3>
+                        <p class="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Архітектурні креслення</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <a href="${pdfPath}" download class="hidden sm:flex items-center gap-2 px-6 py-2 bg-accent text-white rounded-xl hover:bg-blue-800 transition-all font-bold text-sm">
+                        <i class="fas fa-download"></i> Завантажити
+                    </a>
+                    <button onclick="closeMainModal()" class="w-12 h-12 bg-slate-200 hover:bg-slate-300 rounded-xl flex items-center justify-center transition-all text-slate-600">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Фрейм с PDF -->
+            <div class="flex-1 bg-slate-200 relative">
+                <iframe src="${pdfPath}#toolbar=1" class="w-full h-full border-none" title="${projectName}"></iframe>
+                <!-- Заглушка загрузки -->
+                <div class="absolute inset-0 -z-10 flex items-center justify-center">
+                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-accent"></div>
+                </div>
+            </div>
+            
+            <!-- Футер окна (для мобильных) -->
+            <div class="p-4 bg-slate-50 border-t sm:hidden text-center">
+                <a href="${pdfPath}" download class="inline-flex items-center gap-2 px-6 py-3 bg-accent text-white rounded-xl font-bold">
+                    <i class="fas fa-download"></i> Завантажити PDF
+                </a>
+            </div>
+        </div>
+    `;
+    
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    
+    // Закрытие по клавише Escape
+    document.addEventListener('keydown', handleEscapeKey);
+}
 
-    if ("IntersectionObserver" in window) {
-        let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                    let lazyImage = entry.target;
-                    lazyImage.classList.add("lazy-loaded");
-                    lazyImageObserver.unobserve(lazyImage);
-                }
-            });
-        });
+/**
+ * ════════════════════════════════════════════════════════════════
+ * ГАЛЕРЕЯ ИЗОБРАЖЕНИЙ (КОТЕДЖ)
+ * ════════════════════════════════════════════════════════════════
+ */
 
-        lazyImages.forEach(function(lazyImage) {
-            lazyImageObserver.observe(lazyImage);
-        });
+function openCottageGallery() {
+    const images = [
+        { src: 'assets/images/Котедж.png', title: 'Екстер\'єр - Головний вид' },
+        { src: 'assets/images/Вид_1.png', title: 'Вид з саду' },
+        { src: 'assets/images/Вид_2.png', title: 'Нічна візуалізація' },
+        { src: 'assets/images/3д.png', title: 'Конструктивна 3D схема' },
+        { src: 'assets/images/План.png', title: 'Планування поверху' }
+    ];
+    
+    let currentIndex = 0;
+    const modal = document.getElementById('main-modal');
+    const container = document.getElementById('modal-container');
+    
+    const renderGallery = () => {
+        container.innerHTML = `
+            <div class="bg-slate-900 rounded-[2rem] w-full h-[95vh] flex flex-col overflow-hidden shadow-2xl animate-fade-in-up border border-white/10">
+                <!-- Шапка галереи -->
+                <div class="flex justify-between items-center p-6 border-b border-white/5 bg-slate-900/50 backdrop-blur">
+                    <div class="text-white">
+                        <h3 class="text-xl font-bold">${images[currentIndex].title}</h3>
+                        <p class="text-xs text-blue-400 font-bold uppercase tracking-widest mt-1">Проект: Котедж | Фото ${currentIndex + 1} з ${images.length}</p>
+                    </div>
+                    <button onclick="closeMainModal()" class="w-12 h-12 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-all text-white">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <!-- Основное изображение с навигацией -->
+                <div class="flex-1 relative flex items-center justify-center p-4">
+                    <button id="gallery-prev" class="absolute left-6 w-14 h-14 bg-white/10 hover:bg-white/20 rounded-full text-white transition-all flex items-center justify-center z-10 backdrop-blur">
+                        <i class="fas fa-chevron-left text-2xl"></i>
+                    </button>
+                    
+                    <img src="${images[currentIndex].src}" alt="${images[currentIndex].title}" class="max-w-full max-h-full object-contain rounded-lg gallery-main-image">
+                    
+                    <button id="gallery-next" class="absolute right-6 w-14 h-14 bg-white/10 hover:bg-white/20 rounded-full text-white transition-all flex items-center justify-center z-10 backdrop-blur">
+                        <i class="fas fa-chevron-right text-2xl"></i>
+                    </button>
+                </div>
+                
+                <!-- Миниатюры -->
+                <div class="p-6 bg-slate-950/50 flex justify-center gap-4 overflow-x-auto">
+                    ${images.map((img, idx) => `
+                        <div onclick="setGalleryIndex(${idx})" class="w-20 h-20 rounded-xl overflow-hidden cursor-pointer transition-all border-2 ${idx === currentIndex ? 'border-blue-400 scale-110' : 'border-transparent opacity-50 hover:opacity-100'}">
+                            <img src="${img.src}" class="w-full h-full object-cover">
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+        
+        // Переназначаем события для кнопок
+        document.getElementById('gallery-prev').onclick = () => {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            renderGallery();
+        };
+        document.getElementById('gallery-next').onclick = () => {
+            currentIndex = (currentIndex + 1) % images.length;
+            renderGallery();
+        };
+    };
+
+    // Глобальная функция для смены индекса из миниатюр
+    window.setGalleryIndex = (idx) => {
+        currentIndex = idx;
+        renderGallery();
+    };
+
+    renderGallery();
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    
+    // Навигация стрелками клавиатуры
+    const handleKeyboard = (e) => {
+        if (e.key === 'ArrowLeft') document.getElementById('gallery-prev').click();
+        if (e.key === 'ArrowRight') document.getElementById('gallery-next').click();
+        if (e.key === 'Escape') closeMainModal();
+    };
+    document.addEventListener('keydown', handleKeyboard);
+    
+    // Сохраняем обработчик для удаления
+    window.currentGalleryHandler = handleKeyboard;
+}
+
+/**
+ * ════════════════════════════════════════════════════════════════
+ * ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
+ * ════════════════════════════════════════════════════════════════
+ */
+
+function closeMainModal() {
+    const modal = document.getElementById('main-modal');
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
+    
+    // Очищаем события клавиатуры
+    document.removeEventListener('keydown', handleEscapeKey);
+    if (window.currentGalleryHandler) {
+        document.removeEventListener('keydown', window.currentGalleryHandler);
+        window.currentGalleryHandler = null;
     }
-});
+}
+
+function handleEscapeKey(e) {
+    if (e.key === 'Escape') closeMainModal();
+}
+
+// Анимации при прокрутке (Scroll Reveal)
+function initScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-fade-in-up');
+                entry.target.style.opacity = "1";
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        el.style.opacity = "0"; // Начальное состояние
+        observer.observe(el);
+    });
+}
+
+// Прогресс-бар прокрутки
+function initScrollProgress() {
+    const progress = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', () => {
+        const windowScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (windowScroll / height) * 100;
+        if (progress) progress.style.width = scrolled + "%";
+    });
+}
+
+// Кнопка "Вверх"
+function initScrollToTop() {
+    const btn = document.getElementById('scroll-to-top');
+    if (!btn) return;
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+            btn.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
+            btn.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+        } else {
+            btn.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
+            btn.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+        }
+    });
+
+    btn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
