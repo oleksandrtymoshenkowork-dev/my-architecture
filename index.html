@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ОЛЕКСАНДР ТИМОШЕНКО | Архітектор</title>
+    <meta name="description" content="Портфоліо архітектора Олександра Тимошенка. Поєднання традиційного проектування з сучасними цифровими технологіями.">
+    <meta property="og:title" content="ОЛЕКСАНДР ТИМОШЕНКО | Архітектор">
+    <meta property="og:description" content="Портфоліо архітектора Олександра Тимошенка.">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+    <!-- Шрифти: Lora (заголовки) + Inter (текст) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- PDF.js (CDN, без автозавантаження) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+    <!-- Стилі -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Прогрес-бар прокрутки -->
+    <div id="scroll-progress-container">
+        <div id="scroll-progress"></div>
+    </div>
+
+    <!-- Навігація -->
+    <nav id="navbar" class="navbar">
+        <div class="container navbar-inner">
+            <div class="navbar-brand">ОЛЕКСАНДР ТИМОШЕНКО</div>
+
+            <!-- Десктоп меню -->
+            <div class="nav-desktop">
+                <a href="#hero" class="nav-link">Привітання</a>
+                <a href="#resume" class="nav-link">Резюме</a>
+                <a href="#portfolio" class="nav-link">Портфоліо</a>
+                <a href="#contacts" class="nav-link">Контакти</a>
+            </div>
+
+            <!-- Дії: тема + бургер -->
+            <div class="nav-actions">
+                <button id="theme-toggle" class="theme-toggle" aria-label="Перемкнути тему">
+                    <i class="fas fa-sun"></i>
+                </button>
+                <button id="mobile-menu-button" class="mobile-menu-btn" aria-label="Меню" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Мобільне меню -->
+        <div id="mobile-menu" class="mobile-menu hidden">
+            <a href="#hero" class="mobile-menu-link">Привітання</a>
+            <a href="#resume" class="mobile-menu-link">Резюме</a>
+            <a href="#portfolio" class="mobile-menu-link">Портфоліо</a>
+            <a href="#contacts" class="mobile-menu-link">Контакти</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="container hero-content">
+            <div class="hero-photo-wrapper animate-fade-in-up">
+                <div class="hero-photo-circle">
+                    <img src="assets/images/Моя фотографія.jpg" alt="Олександр Тимошенко" class="hero-photo" loading="lazy">
+                </div>
+                <div class="hero-compass">
+                    <i class="fas fa-compass"></i>
+                </div>
+            </div>
+
+            <h1 class="hero-title animate-fade-in-up" style="animation-delay: 0.2s">
+                Алгоритм, що стає простором.
+            </h1>
+
+            <p class="hero-subtitle animate-fade-in-up" style="animation-delay: 0.4s">
+                Вітаю! Я Олександр Тимошенко — архітектор, що поєднує традиційне проектування
+                з сучасними цифровими технологіями. Створюю простори, де алгоритм стає архітектурою,
+                а технології служать людині.
+            </p>
+
+            <div class="hero-actions animate-fade-in-up" style="animation-delay: 0.6s">
+                <a href="#portfolio" class="btn btn-primary">Переглянути портфоліо</a>
+                <a href="#contacts" class="btn btn-outline">Зв'язатися</a>
+            </div>
+        </div>
+
+        <div class="hero-decoration hero-decoration--1"></div>
+        <div class="hero-decoration hero-decoration--2"></div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="resume-section">
+        <div class="container">
+            <h2 class="section-title">
+                Резюме
+                <span class="accent-line"></span>
+            </h2>
+
+            <div class="resume-grid">
+                <!-- Досвід роботи -->
+                <div class="animate-on-scroll">
+                    <h3 class="resume-subtitle">
+                        <i class="fas fa-briefcase"></i> Досвід роботи
+                    </h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot timeline-dot--active"></div>
+                            <span class="timeline-date">06.2025 — 01.2026</span>
+                            <h4 class="timeline-role">Архітектор</h4>
+                            <p class="timeline-company">Майстерня комфорту, Львів</p>
+                            <p class="timeline-desc">Будівництво, архітектура, дизайн інтер'єру</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <span class="timeline-date">07.2024 — 12.2024</span>
+                            <h4 class="timeline-role">Архітектор</h4>
+                            <p class="timeline-company">А7 Хаб, Львів</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <span class="timeline-date">03.2024 — 06.2024</span>
+                            <h4 class="timeline-role">Архітектор</h4>
+                            <p class="timeline-company">АртХаусБуд, Львів</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <span class="timeline-date">03.2021 — 07.2021</span>
+                            <h4 class="timeline-role">Адміністратор відділення</h4>
+                            <p class="timeline-company">ТОВ «Нова Пей», Львів</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <span class="timeline-date">06.2018 — 07.2018</span>
+                            <h4 class="timeline-role">Помічник архітектора</h4>
+                            <p class="timeline-company">Архітектура плюс дизайн, Житомир</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resume-right">
+                    <!-- Освіта -->
+                    <div class="animate-on-scroll">
+                        <h3 class="resume-subtitle">
+                            <i class="fas fa-graduation-cap"></i> Освіта
+                        </h3>
+                        <div class="education-list">
+                            <div class="education-card">
+                                <span class="education-date">2023 — 2024</span>
+                                <h4 class="education-name">НУ «Львівська політехніка»</h4>
+                                <p class="education-desc">Архітектура та містобудування (Вища освіта)</p>
+                            </div>
+                            <div class="education-card">
+                                <span class="education-date">2020 — 2023</span>
+                                <h4 class="education-name">НУ «Львівська політехніка»</h4>
+                                <p class="education-desc">Архітектура та містобудування (Незакінчена вища)</p>
+                            </div>
+                            <div class="education-card">
+                                <span class="education-date">2016 — 2020</span>
+                                <h4 class="education-name">Будівельний коледж ЖНАЕУ</h4>
+                                <p class="education-desc">Опорядження будівель і споруд та будівельний дизайн</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Навички -->
+                    <div class="animate-on-scroll">
+                        <h3 class="resume-subtitle">
+                            <i class="fas fa-laptop-code"></i> Навички
+                        </h3>
+                        <div class="skills-list">
+                            <div>
+                                <div class="skill-item-header">
+                                    <span class="skill-name">ArchiCAD</span>
+                                    <span class="skill-level">7/10</span>
+                                </div>
+                                <div class="skill-bar"><div class="skill-bar-fill" style="width: 70%"></div></div>
+                            </div>
+                            <div>
+                                <div class="skill-item-header">
+                                    <span class="skill-name">Enscape</span>
+                                    <span class="skill-level">6/10</span>
+                                </div>
+                                <div class="skill-bar"><div class="skill-bar-fill" style="width: 60%"></div></div>
+                            </div>
+                            <div>
+                                <div class="skill-item-header">
+                                    <span class="skill-name">AutoCAD / Twinmotion / CapCut</span>
+                                    <span class="skill-level">5/10</span>
+                                </div>
+                                <div class="skill-bar"><div class="skill-bar-fill" style="width: 50%"></div></div>
+                            </div>
+                            <div>
+                                <div class="skill-item-header">
+                                    <span class="skill-name">Photoshop / Illustrator / Premiere Pro</span>
+                                    <span class="skill-level">4/10</span>
+                                </div>
+                                <div class="skill-bar"><div class="skill-bar-fill" style="width: 40%"></div></div>
+                            </div>
+                            <div>
+                                <div class="skill-item-header">
+                                    <span class="skill-name">Revit</span>
+                                    <span class="skill-level">3/10</span>
+                                </div>
+                                <div class="skill-bar"><div class="skill-bar-fill" style="width: 30%"></div></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-tags">
+                            <span class="skill-tag">Nano Banana Pro</span>
+                            <span class="skill-tag">NotebookLM</span>
+                            <span class="skill-tag">Google Gemini</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Блок очікувань -->
+            <div class="quote-section animate-on-scroll">
+                <div class="quote-card">
+                    <i class="fas fa-quote-right quote-icon"></i>
+                    <h3 class="quote-card-title">Чого я чекаю від нашої співпраці?</h3>
+                    <div class="quote-list">
+                        <p>— Масштабних викликів, де потрібен не просто виконавець, а творець.</p>
+                        <p>— Переходу від традиційного креслення до повноцінної цифрової екосистеми.</p>
+                        <p>— Можливості міксувати архітектурну класику з алгоритмічним дизайном.</p>
+                        <p class="quote-cta">Давайте створювати те, що раніше здавалося неможливим.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio-section">
+        <div class="container">
+            <h2 class="section-title">
+                Портфоліо
+                <span class="accent-line"></span>
+            </h2>
+
+            <!-- Фільтри -->
+            <div class="filter-bar">
+                <button data-filter="all" class="filter-btn active" id="filter-all">Всі проекти</button>
+                <button data-filter="conceptual" class="filter-btn" id="filter-conceptual">Концептуальні</button>
+                <button data-filter="working" class="filter-btn" id="filter-working">Робочі</button>
+            </div>
+
+            <!-- Сітка проєктів -->
+            <div id="projects-grid" class="projects-grid">
+
+                <div class="project-card animate-on-scroll" data-category="conceptual" data-index="0">
+                    <div class="project-card__image">
+                        <img src="assets/images/Стадіон.png" alt="Стадіон (Тернопіль)" loading="lazy">
+                        <div class="project-card__overlay"></div>
+                    </div>
+                    <div class="project-card__info">
+                        <h4 class="project-card__title">Стадіон (Тернопіль)</h4>
+                        <p class="project-card__type">Концептуальний проект</p>
+                    </div>
+                </div>
+
+                <div class="project-card animate-on-scroll" data-category="conceptual" data-index="1">
+                    <div class="project-card__image">
+                        <img src="assets/images/ГП.png" alt="Генплан ЖК (Вінниця)" loading="lazy">
+                        <div class="project-card__overlay"></div>
+                    </div>
+                    <div class="project-card__info">
+                        <h4 class="project-card__title">Генплан ЖК (Вінниця)</h4>
+                        <p class="project-card__type">Концептуальний проект</p>
+                    </div>
+                </div>
+
+                <div class="project-card animate-on-scroll" data-category="conceptual" data-index="2">
+                    <div class="project-card__image">
+                        <img src="assets/images/Однородинний.png" alt="Однородинний будинок" loading="lazy">
+                        <div class="project-card__overlay"></div>
+                    </div>
+                    <div class="project-card__info">
+                        <h4 class="project-card__title">Однородинний будинок</h4>
+                        <p class="project-card__type">Концептуальний проект</p>
+                    </div>
+                </div>
+
+                <div class="project-card animate-on-scroll" data-category="conceptual" data-index="3">
+                    <div class="project-card__image">
+                        <img src="assets/images/Maxi.png" alt="Модульний будинок Maxi" loading="lazy">
+                        <div class="project-card__overlay"></div>
+                    </div>
+                    <div class="project-card__info">
+                        <h4 class="project-card__title">Модульний будинок Maxi</h4>
+                        <p class="project-card__type">Концептуальний проект</p>
+                    </div>
+                </div>
+
+                <div class="project-card animate-on-scroll" data-category="conceptual" data-index="4">
+                    <div class="project-card__image">
+                        <img src="assets/images/Mini.png" alt="Модульний будинок Mini" loading="lazy">
+                        <div class="project-card__overlay"></div>
+                    </div>
+                    <div class="project-card__info">
+                        <h4 class="project-card__title">Модульний будинок Mini</h4>
+                        <p class="project-card__type">Концептуальний проект</p>
+                    </div>
+                </div>
+
+                <div class="project-card animate-on-scroll" data-category="conceptual" data-index="5">
+                    <div class="project-card__image">
+                        <img src="assets/images/Офіс.png" alt="Модульний офіс" loading="lazy">
+                        <div class="project-card__overlay"></div>
+                    </div>
+                    <div class="project-card__info">
+                        <h4 class="project-card__title">Модульний офіс</h4>
+                        <p class="project-card__type">Концептуальний проект</p>
+                    </div>
+                </div>
+
+                <div class="project-card animate-on-scroll" data-category="conceptual" data-index="6">
+                    <div class="project-card__image">
+                        <img src="assets/images/Госп.буд.png" alt="Господарський будиночок" loading="lazy">
+                        <div class="project-card__overlay"></div>
+                    </div>
+                    <div class="project-card__info">
+                        <h4 class="project-card__title">Господарський будиночок</h4>
+                        <p class="project-card__type">Концептуальний проект</p>
+                    </div>
+                </div>
+
+                <div class="project-card animate-on-scroll" data-category="conceptual" data-index="7">
+                    <div class="project-card__image">
+                        <img src="assets/images/Котедж.png" alt="Котедж" loading="lazy">
+                        <div class="project-card__overlay"></div>
+                        <div class="project-card__gallery-badge">
+                            <span><i class="fas fa-images"></i> Переглянути галерею (5 фото)</span>
+                        </div>
+                    </div>
+                    <div class="project-card__info">
+                        <h4 class="project-card__title">Котедж</h4>
+                        <p class="project-card__type">Концептуальний проект • Розширена візуалізація</p>
+                    </div>
+                </div>
+
+                <div class="project-card animate-on-scroll" data-category="working" data-index="8">
+                    <div class="project-card__image">
+                        <img src="assets/images/Церква.png" alt="Церква в Карпатах" loading="lazy">
+                        <div class="project-card__overlay"></div>
+                    </div>
+                    <div class="project-card__info">
+                        <h4 class="project-card__title">Церква в Карпатах</h4>
+                        <p class="project-card__type">Робочий проект</p>
+                    </div>
+                </div>
+
+                <div class="project-card animate-on-scroll" data-category="working" data-index="9">
+                    <div class="project-card__image">
+                        <img src="assets/images/ЖК Васильева.png" alt="ЖК Васильєва" loading="lazy">
+                        <div class="project-card__overlay"></div>
+                    </div>
+                    <div class="project-card__info">
+                        <h4 class="project-card__title">ЖК Васильєва</h4>
+                        <p class="project-card__type">Робочий проект</p>
+                    </div>
+                </div>
+
+                <div class="project-card animate-on-scroll" data-category="working" data-index="10">
+                    <div class="project-card__image">
+                        <img src="assets/images/ЖК Лісові гринівці.png" alt="ЖК Лісові гринівці" loading="lazy">
+                        <div class="project-card__overlay"></div>
+                    </div>
+                    <div class="project-card__info">
+                        <h4 class="project-card__title">ЖК Лісові гринівці</h4>
+                        <p class="project-card__type">Робочий проект</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacts Section -->
+    <section id="contacts" class="contacts-section">
+        <div class="container" style="text-align: center; position: relative; z-index: 2;">
+            <div class="animate-on-scroll">
+                <h2 class="contacts-heading">Готові до нових<br><span class="accent">викликів?</span></h2>
+                <p class="contacts-desc">
+                    Якщо вам потрібен архітектор, який не боїться складних завдань та прагне до інновацій — я відкритий до пропозицій.
+                </p>
+
+                <div class="contacts-grid">
+                    <div class="contact-card" onclick="copyToClipboard('oleksandr.tymoshenko.work@gmail.com', 'Email скопійовано!')">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <p class="contact-label">Email</p>
+                            <p class="contact-value">oleksandr.tymoshenko.work@gmail.com</p>
+                        </div>
+                    </div>
+
+                    <a href="https://t.me/Tymoshenko_official" target="_blank" class="contact-card">
+                        <div class="contact-icon"><i class="fab fa-telegram-plane"></i></div>
+                        <div>
+                            <p class="contact-label">Телеграм</p>
+                            <p class="contact-value contact-value--lg">@Tymoshenko_official</p>
+                        </div>
+                    </a>
+
+                    <div class="contact-card" onclick="copyToClipboard('+380630199204', 'Номер скопійовано!')">
+                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                        <div>
+                            <p class="contact-label">Телефон</p>
+                            <p class="contact-value contact-value--lg">+38 063 01 99 204</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contacts-bg"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-copy">© 2026 ОЛЕКСАНДР ТИМОШЕНКО. Всі права захищені.</p>
+            <p class="footer-sub">Designed for Innovation | Built with modern Tech</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top -->
+    <button id="scroll-to-top" class="scroll-to-top" aria-label="Прокрутити вгору">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Project view та PDF view створюються динамічно в JS -->
+
+    <script src="script.js?v=2"></script>
+</body>
+</html>
