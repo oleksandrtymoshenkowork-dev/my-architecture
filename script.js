@@ -11,7 +11,7 @@ const projectsData = [
   { title: "Модульний будинок Mini", type: "Концептуальний проект", images: ["assets/images/Mini.png"], pdf: "assets/documents/Mini.pdf", category: "conceptual" },
   { title: "Модульний офіс", type: "Концептуальний проект", images: ["assets/images/Офіс.png"], pdf: "assets/documents/Офіс.pdf", category: "conceptual" },
   { title: "Господарський будиночок", type: "Концептуальний проект", images: ["assets/images/Госп.буд.png"], pdf: "assets/documents/Госп.буд.pdf", category: "conceptual" },
-  { title: "Котедж", type: "Концептуальний проект • Розширена візуалізація", images: ["assets/images/Котедж.png","assets/images/Вид_1.png","assets/images/Вид_2.png","assets/images/3д.png","assets/images/План.png"], pdf: "assets/documents/Котедж.pdf", category: "conceptual" },
+  { title: "Котедж", type: "Концептуальний проект • Розширена візуалізація", images: ["assets/images/Котедж.png","assets/images/Вид_1.png","assets/images/Вид_2.png","assets/images/3д.png"], pdf: "assets/documents/Котедж.pdf", category: "conceptual" },
   { title: "Церква в Карпатах", type: "Робочий проект", images: ["assets/images/Церква.png"], pdf: "assets/documents/Церква.pdf", category: "working" },
   { title: "ЖК Васильєва", type: "Робочий проект", images: ["assets/images/ЖК Васильева.png"], pdf: "assets/documents/ЖК Васильєва.pdf", category: "working" },
   { title: "ЖК Лісові гринівці", type: "Робочий проект", images: ["assets/images/ЖК Лісові гринівці.png"], pdf: "assets/documents/ЖК Лісові гринівці.pdf", category: "working" }
