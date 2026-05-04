@@ -910,24 +910,31 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 500; lin
 .contact-card {
   flex: 1;
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 1rem;
-  padding: 1.5rem;
+  padding: 1.5rem 1rem;
   background: rgba(255,255,255,0.05);
   border-radius: var(--radius-lg);
   border: 1px solid rgba(255,255,255,0.1);
   cursor: pointer;
-  transition: border-color var(--transition-base);
+  transition: all var(--transition-base);
   color: var(--color-dark-text);
   min-height: 5rem;
-  overflow: hidden;
   min-width: 0;
 }
 .contact-card > div:last-child {
+  flex: 1;
   min-width: 0;
-  overflow: hidden;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  height: 3.5rem;
 }
-.contact-card:hover { border-color: rgba(var(--color-accent-rgb),0.5); }
+.contact-card:hover { 
+  border-color: rgba(var(--color-accent-rgb),0.5); 
+  transform: translateY(-2px);
+}
 
 .contact-icon {
   width: 3.5rem; height: 3.5rem;
@@ -944,28 +951,41 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 500; lin
 .contact-card:hover .contact-icon {
   background: var(--color-accent);
   color: #fff;
+  transform: scale(1.05);
 }
 
 .contact-label {
+  align-self: end;
   font-size: 0.625rem;
   text-transform: uppercase;
   font-weight: 700;
   letter-spacing: 0.15em;
   color: var(--color-dark-text-secondary);
+  margin-bottom: 0.25rem;
+  text-align: center;
+  width: 100%;
 }
 .contact-value {
-  font-size: 0.9rem;
+  align-self: start;
+  font-size: 0.85rem;
   font-weight: 500;
   overflow: hidden;
   text-overflow: ellipsis;
-  word-break: break-all;
-  overflow-wrap: break-word;
-  max-width: 100%;
+  white-space: nowrap;
+  width: 100%;
+  text-align: center;
 }
 .contact-value--lg {
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 700;
-  word-break: normal;
+}
+
+@media (max-width: 768px) {
+  .contact-value {
+    white-space: normal;
+    word-break: break-all;
+    overflow-wrap: break-word;
+  }
 }
 
 /* Фонова декорація */
