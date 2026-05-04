@@ -45,16 +45,11 @@ function initTheme() {
   const toggle = document.getElementById('theme-toggle');
   const saved = localStorage.getItem('theme');
   
+  // Тема вже встановлена як dark в HTML. Змінюємо тільки якщо збережена light.
   if (saved === 'light') {
     document.documentElement.setAttribute('data-theme', 'light');
-  } else if (saved === 'dark') {
-    document.documentElement.setAttribute('data-theme', 'dark'); // fallback to root
-  } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-    document.documentElement.setAttribute('data-theme', 'light');
-  } else {
-    // Default is dark (no attribute needed, or 'dark' works too since root handles it)
-    document.documentElement.setAttribute('data-theme', 'dark');
   }
+  // Якщо нічого не збережено — залишаємо dark (вже в HTML)
   
   updateThemeIcon();
   
@@ -65,13 +60,6 @@ function initTheme() {
     document.documentElement.setAttribute('data-theme', next);
     localStorage.setItem('theme', next);
     updateThemeIcon();
-  });
-  
-  window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
-    if (!localStorage.getItem('theme')) {
-      document.documentElement.setAttribute('data-theme', e.matches ? 'light' : 'dark');
-      updateThemeIcon();
-    }
   });
 }
 
@@ -98,6 +86,12 @@ function initMobileMenu() {
   const btn = document.getElementById('mobile-menu-button');
   const menu = document.getElementById('mobile-menu');
 
+  function closeMenu() {
+    menu.classList.add('hidden');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.querySelector('i').className = 'fas fa-bars';
+  }
+
   btn.addEventListener('click', () => {
     const isOpen = !menu.classList.contains('hidden');
     menu.classList.toggle('hidden');
@@ -105,13 +99,17 @@ function initMobileMenu() {
     btn.querySelector('i').className = isOpen ? 'fas fa-bars' : 'fas fa-times';
   });
 
+  // Закривати меню при кліку на посилання
   document.querySelectorAll('.mobile-menu-link').forEach(link => {
-    link.addEventListener('click', () => {
-      menu.classList.add('hidden');
-      btn.setAttribute('aria-expanded', 'false');
-      btn.querySelector('i').className = 'fas fa-bars';
-    });
+    link.addEventListener('click', closeMenu);
   });
+
+  // Закривати меню при скролі сторінки
+  window.addEventListener('scroll', () => {
+    if (!menu.classList.contains('hidden')) {
+      closeMenu();
+    }
+  }, { passive: true });
 }
 
 /**
@@ -241,16 +239,10 @@ function renderProjectView() {
     <div class="project-view__nav">
       <button class="project-nav-btn project-nav-btn--prev" id="pv-prev">
         <i class="fas fa-chevron-left"></i>
-        <div>
-          <div class="project-nav-btn__label">Попередній</div>
-          <div class="project-nav-btn__title">${projectsData[prevIdx].title}</div>
-        </div>
+        <span class="project-nav-btn__label">Попередній</span>
       </button>
       <button class="project-nav-btn project-nav-btn--next" id="pv-next">
-        <div>
-          <div class="project-nav-btn__label">Наступний</div>
-          <div class="project-nav-btn__title">${projectsData[nextIdx].title}</div>
-        </div>
+        <span class="project-nav-btn__label">Наступний</span>
         <i class="fas fa-chevron-right"></i>
       </button>
     </div>
@@ -344,16 +336,12 @@ function openLightbox(src, alt) {
 
 /**
  * ════════════════════════════════════════════
- * PDF ПЕРЕГЛЯДАЧ (PDF.js)
+ * PDF ПЕРЕГЛЯДАЧ (PDF.js) — Вертикальна стрічка
  * ════════════════════════════════════════════
  */
 let pdfDoc = null,
-    pageNum = 1,
-    pageRendering = false,
-    pageNumPending = null,
     pdfScale = 1.0,
-    pdfCanvas = null,
-    pdfCtx = null;
+    pdfBaseScale = 1.0;
 
 function openPDFView(project) {
   const pdfPath = encodeURI(project.pdf);
@@ -362,7 +350,7 @@ function openPDFView(project) {
   const existing = document.getElementById('pdf-view');
   if (existing) existing.remove();
 
-  // Створюємо базовий UI
+  // Створюємо базовий UI — спрощений для мобільних
   const pdfView = document.createElement('div');
   pdfView.className = 'pdf-view';
   pdfView.id = 'pdf-view';
@@ -375,25 +363,9 @@ function openPDFView(project) {
           <p>Архітектурні креслення</p>
         </div>
       </div>
-      
-      <!-- Toolbar: Навігація та Зум -->
-      <div class="pdf-toolbar">
-        <div class="pdf-toolbar__group">
-          <button class="pdf-btn" id="pdf-prev" disabled title="Попередня сторінка"><i class="fas fa-chevron-up"></i></button>
-          <span class="pdf-page-info"><span id="pdf-page-num">1</span> / <span id="pdf-page-count">-</span></span>
-          <button class="pdf-btn" id="pdf-next" disabled title="Наступна сторінка"><i class="fas fa-chevron-down"></i></button>
-        </div>
-        <div class="pdf-toolbar__group divider">
-          <button class="pdf-btn" id="pdf-zoom-out" title="Зменшити"><i class="fas fa-search-minus"></i></button>
-          <button class="pdf-btn" id="pdf-zoom-in" title="Збільшити"><i class="fas fa-search-plus"></i></button>
-        </div>
-      </div>
 
       <div class="pdf-view__actions">
-        <a href="${pdfPath}" download class="pdf-download-btn" id="pdf-download" title="Завантажити PDF">
-          <i class="fas fa-download"></i> Завантажити
-        </a>
-        <button class="pdf-view__back" id="pdf-back"><i class="fas fa-arrow-left"></i> Назад до фото</button>
+        <button class="pdf-view__back" id="pdf-back"><i class="fas fa-arrow-left"></i> Назад</button>
       </div>
     </div>
     
@@ -403,17 +375,18 @@ function openPDFView(project) {
         <div class="spinner"></div>
         <p>Завантаження документа...</p>
       </div>
-      <!-- Контейнер для канвасу -->
-      <div class="pdf-canvas-wrapper">
-        <canvas id="pdf-canvas"></canvas>
-      </div>
+      <!-- Контейнер для всіх сторінок -->
+      <div class="pdf-pages-container" id="pdf-pages-container"></div>
+    </div>
+
+    <!-- Плаваючі кнопки зуму -->
+    <div class="pdf-zoom-fab">
+      <button class="pdf-zoom-btn" id="pdf-zoom-in" title="Збільшити"><i class="fas fa-search-plus"></i></button>
+      <button class="pdf-zoom-btn" id="pdf-zoom-out" title="Зменшити"><i class="fas fa-search-minus"></i></button>
     </div>
   `;
 
   document.body.appendChild(pdfView);
-
-  pdfCanvas = document.getElementById('pdf-canvas');
-  pdfCtx = pdfCanvas.getContext('2d');
 
   // Закриття PDF
   const pdfBackBtn = document.getElementById('pdf-back');
@@ -428,31 +401,26 @@ function initPDF(url) {
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
   pdfDoc = null;
-  pageNum = 1;
-  pdfScale = 1.5; // Базовий масштаб (для якості на retina)
+  pdfScale = 1.0;
+  pdfBaseScale = 1.0;
 
   const loadingTask = pdfjsLib.getDocument(url);
   loadingTask.promise.then(function(pdfDoc_) {
     pdfDoc = pdfDoc_;
-    document.getElementById('pdf-page-count').textContent = pdfDoc.numPages;
     
     // Прибираємо лоадер
-    document.getElementById('pdf-loader').style.display = 'none';
-    
-    // Включаємо кнопки
-    updatePDFButtons();
+    const loader = document.getElementById('pdf-loader');
+    if (loader) loader.style.display = 'none';
 
-    // Обробники кнопок
-    document.getElementById('pdf-prev').addEventListener('click', onPrevPage);
-    document.getElementById('pdf-next').addEventListener('click', onNextPage);
-    document.getElementById('pdf-zoom-in').addEventListener('click', () => onZoom(0.25));
-    document.getElementById('pdf-zoom-out').addEventListener('click', () => onZoom(-0.25));
+    // Обробники кнопок зуму
+    document.getElementById('pdf-zoom-in').addEventListener('click', () => onPdfZoom(0.3));
+    document.getElementById('pdf-zoom-out').addEventListener('click', () => onPdfZoom(-0.3));
 
     // Клавіатурна навігація для PDF
     document.addEventListener('keydown', handlePDFKeys);
 
-    // Рендеримо першу сторінку
-    renderPage(pageNum);
+    // Рендеримо всі сторінки як вертикальну стрічку
+    renderAllPages();
   }).catch(function(error) {
     console.error('Помилка завантаження PDF: ', error);
     const loader = document.getElementById('pdf-loader');
@@ -466,88 +434,100 @@ function initPDF(url) {
   });
 }
 
-function renderPage(num) {
-  pageRendering = true;
-  
-  pdfDoc.getPage(num).then(function(page) {
-    const viewport = page.getViewport({scale: pdfScale});
-    pdfCanvas.height = viewport.height;
-    pdfCanvas.width = viewport.width;
+function renderAllPages() {
+  const container = document.getElementById('pdf-pages-container');
+  if (!container || !pdfDoc) return;
+  container.innerHTML = '';
 
-    // CSS стилізація для коректного відображення масштабу
-    pdfCanvas.style.width = `${viewport.width}px`;
-    pdfCanvas.style.height = `${viewport.height}px`;
+  // Визначаємо оптимальний масштаб
+  const body = document.getElementById('pdf-body');
+  const containerWidth = body ? body.clientWidth - 32 : window.innerWidth - 32; // 32px padding
+
+  // Рендер кожної сторінки
+  const renderPromises = [];
+  for (let i = 1; i <= pdfDoc.numPages; i++) {
+    renderPromises.push(renderSinglePage(i, container, containerWidth));
+  }
+
+  Promise.all(renderPromises).then(() => {
+    // Базовий масштаб збережений
+  });
+}
+
+function renderSinglePage(pageNumber, container, containerWidth) {
+  return pdfDoc.getPage(pageNumber).then(function(page) {
+    // Визначаємо масштаб для якості
+    const unscaledViewport = page.getViewport({ scale: 1.0 });
+    
+    // Масштаб щоб вписати в ширину контейнера
+    const fitScale = containerWidth / unscaledViewport.width;
+    pdfBaseScale = fitScale;
+    
+    // Рендеримо з вищою якістю (devicePixelRatio)
+    const pixelRatio = window.devicePixelRatio || 1;
+    const renderScale = fitScale * pdfScale * pixelRatio;
+    const displayScale = fitScale * pdfScale;
+    
+    const viewport = page.getViewport({ scale: renderScale });
+    const displayViewport = page.getViewport({ scale: displayScale });
+
+    // Створюємо wrapper для сторінки
+    const pageWrapper = document.createElement('div');
+    pageWrapper.className = 'pdf-page-wrapper';
+    pageWrapper.setAttribute('data-page', pageNumber);
+
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Канвас з високою роздільністю
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+    
+    // CSS розмір — реальний розмір на екрані
+    canvas.style.width = `${displayViewport.width}px`;
+    canvas.style.height = `${displayViewport.height}px`;
+
+    pageWrapper.appendChild(canvas);
+
+    // Номер сторінки
+    const pageLabel = document.createElement('div');
+    pageLabel.className = 'pdf-page-label';
+    pageLabel.textContent = `${pageNumber} / ${pdfDoc.numPages}`;
+    pageWrapper.appendChild(pageLabel);
+
+    container.appendChild(pageWrapper);
 
     const renderContext = {
-      canvasContext: pdfCtx,
+      canvasContext: ctx,
       viewport: viewport
     };
     
-    const renderTask = page.render(renderContext);
-
-    renderTask.promise.then(function() {
-      pageRendering = false;
-      if (pageNumPending !== null) {
-        renderPage(pageNumPending);
-        pageNumPending = null;
-      }
-    });
+    return page.render(renderContext).promise;
   });
-
-  document.getElementById('pdf-page-num').textContent = num;
-  updatePDFButtons();
 }
 
-function queueRenderPage(num) {
-  if (pageRendering) {
-    pageNumPending = num;
-  } else {
-    renderPage(num);
-  }
-}
-
-function onPrevPage() {
-  if (pageNum <= 1) return;
-  pageNum--;
-  queueRenderPage(pageNum);
-}
-
-function onNextPage() {
-  if (pageNum >= pdfDoc.numPages) return;
-  pageNum++;
-  queueRenderPage(pageNum);
-}
-
-function onZoom(delta) {
+function onPdfZoom(delta) {
   let newScale = pdfScale + delta;
   if (newScale < 0.5) newScale = 0.5;
-  if (newScale > 3.0) newScale = 3.0;
+  if (newScale > 4.0) newScale = 4.0;
   
   if (newScale !== pdfScale) {
     pdfScale = newScale;
-    queueRenderPage(pageNum);
+    renderAllPages();
   }
-}
-
-function updatePDFButtons() {
-  if (!pdfDoc) return;
-  document.getElementById('pdf-prev').disabled = pageNum <= 1;
-  document.getElementById('pdf-next').disabled = pageNum >= pdfDoc.numPages;
 }
 
 function closePDFView() {
   const pdfView = document.getElementById('pdf-view');
   if (pdfView) pdfView.remove();
   document.removeEventListener('keydown', handlePDFKeys);
-  pdfDoc = null; // Очищення пам'яті
+  pdfDoc = null;
 }
 
 function handlePDFKeys(e) {
   if (e.key === 'Escape') closePDFView();
-  if (e.key === 'ArrowUp') onPrevPage();
-  if (e.key === 'ArrowDown') onNextPage();
-  if (e.key === '=' || e.key === '+') onZoom(0.25);
-  if (e.key === '-') onZoom(-0.25);
+  if (e.key === '=' || e.key === '+') onPdfZoom(0.3);
+  if (e.key === '-') onPdfZoom(-0.3);
 }
 
 /**

@@ -920,6 +920,12 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 500; lin
   transition: border-color var(--transition-base);
   color: var(--color-dark-text);
   min-height: 5rem;
+  overflow: hidden;
+  min-width: 0;
+}
+.contact-card > div:last-child {
+  min-width: 0;
+  overflow: hidden;
 }
 .contact-card:hover { border-color: rgba(var(--color-accent-rgb),0.5); }
 
@@ -952,10 +958,14 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 500; lin
   font-weight: 500;
   overflow: hidden;
   text-overflow: ellipsis;
+  word-break: break-all;
+  overflow-wrap: break-word;
+  max-width: 100%;
 }
 .contact-value--lg {
   font-size: 1.125rem;
   font-weight: 700;
+  word-break: normal;
 }
 
 /* Фонова декорація */
@@ -1153,11 +1163,13 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 500; lin
   .section-title { font-size: 1.5rem; margin-bottom: 2.5rem; }
   .contacts-heading { font-size: 1.75rem; }
   .contact-card { padding: 1rem; }
-  .contact-value { font-size: 0.8rem; }
-  .contact-value--lg { font-size: 1rem; }
+  .contact-value { font-size: 0.75rem; }
+  .contact-value--lg { font-size: 0.95rem; }
   .filter-btn { padding: 0.625rem 1.25rem; font-size: 0.8rem; }
   .quote-card { padding: 1.5rem; }
   .btn { padding: 0.875rem 1.5rem; font-size: 0.8rem; }
+  /* CTA кнопки сховані на дрібних мобільних — навігація через бургер-меню */
+  .hero-actions { display: none; }
 }
 
 /* Планшет і нижче */
@@ -1166,8 +1178,8 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 500; lin
   .timeline { padding-left: 2.5rem; }
   .timeline-dot { left: -2.5rem; width: 30px; height: 30px; }
   .contacts-grid { gap: 1rem; }
-  .hero-actions { width: 100%; }
-  .hero-actions .btn { width: 100%; justify-content: center; }
+  /* CTA кнопки сховані на мобільних — навігація через бургер-меню */
+  .hero-actions { display: none; }
 }
 
 /* Середні екрани */
@@ -1244,15 +1256,15 @@ button:focus-visible {
   justify-content: space-between;
   align-items: center;
   padding: 0.75rem 1.5rem;
-  background: rgba(253, 252, 251, 0.7);
+  background: rgba(28, 25, 23, 0.7);
   backdrop-filter: blur(12px) saturate(180%);
   -webkit-backdrop-filter: blur(12px) saturate(180%);
-  border-bottom: 1px solid rgba(230, 228, 222, 0.5);
+  border-bottom: 1px solid rgba(63, 57, 54, 0.5);
   min-height: 3.5rem;
 }
-[data-theme="dark"] .project-view__header {
-  background: rgba(28, 25, 23, 0.7);
-  border-bottom: 1px solid rgba(63, 57, 54, 0.5);
+[data-theme="light"] .project-view__header {
+  background: rgba(253, 252, 251, 0.7);
+  border-bottom: 1px solid rgba(230, 228, 222, 0.5);
 }
 .project-view__back {
   display: flex;
@@ -1372,7 +1384,7 @@ button:focus-visible {
   margin: 0 auto;
   padding: 2rem 1.5rem 4rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   gap: 1rem;
   border-top: 1px solid var(--color-border);
@@ -1380,8 +1392,8 @@ button:focus-visible {
 .project-nav-btn {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 1.5rem;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
   border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
   background: var(--color-surface);
@@ -1391,7 +1403,7 @@ button:focus-visible {
   cursor: pointer;
   transition: all var(--transition-base);
   min-height: 44px;
-  max-width: 48%;
+  white-space: nowrap;
 }
 .project-nav-btn:hover {
   border-color: var(--color-accent);
@@ -1400,21 +1412,10 @@ button:focus-visible {
   box-shadow: var(--shadow-md);
 }
 .project-nav-btn__label {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--color-text-tertiary);
-  font-weight: 700;
-}
-.project-nav-btn__title {
   font-size: 0.875rem;
   font-weight: 600;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  letter-spacing: 0.02em;
 }
-.project-nav-btn--prev { text-align: left; }
-.project-nav-btn--next { text-align: right; }
 
 
 /* Lightbox (тап на фото → повний екран) */
@@ -1455,7 +1456,7 @@ button:focus-visible {
 .photo-lightbox__close:hover { background: rgba(255,255,255,0.2); }
 
 /* ═══════════════════════════════════════════
-   PDF ПЕРЕГЛЯДАЧ (Етап 4)
+   PDF ПЕРЕГЛЯДАЧ — Вертикальна стрічка
    ═══════════════════════════════════════════ */
 .pdf-view {
   position: fixed;
@@ -1472,164 +1473,157 @@ button:focus-visible {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 1.5rem;
+  padding: 0.75rem 1rem;
   border-bottom: 1px solid var(--color-border);
   background: var(--color-surface-alt);
   min-height: 3.5rem;
   z-index: 10;
+  flex-shrink: 0;
 }
 .pdf-view__header-left {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
+  min-width: 0;
+  overflow: hidden;
 }
 .pdf-view__icon {
-  width: 2.75rem; height: 2.75rem;
+  width: 2.5rem; height: 2.5rem;
+  min-width: 2.5rem;
   background: var(--color-accent-light);
   color: var(--color-accent);
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 .pdf-view__header-left h3 {
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: var(--color-text);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 200px;
+  max-width: 140px;
 }
 @media (min-width: 768px) {
-  .pdf-view__header-left h3 { max-width: 400px; }
+  .pdf-view__header-left h3 { max-width: 400px; font-size: 1rem; }
 }
 .pdf-view__header-left p {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   color: var(--color-text-tertiary);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
 
-/* Toolbar (кнопки керування PDF) */
-.pdf-toolbar {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: var(--color-surface);
-  padding: 0.5rem 1rem;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-border);
-}
-@media (max-width: 768px) {
-  .pdf-toolbar {
-    position: absolute;
-    bottom: 1.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    box-shadow: var(--shadow-lg);
-  }
-}
-.pdf-toolbar__group {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-.pdf-toolbar__group.divider {
-  border-left: 1px solid var(--color-border);
-  padding-left: 0.5rem;
-  margin-left: 0.25rem;
-}
-.pdf-btn {
-  width: 2.25rem; height: 2.25rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  border: none;
-  border-radius: var(--radius-sm);
-  color: var(--color-text);
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-.pdf-btn:hover:not(:disabled) {
-  background: var(--color-surface-alt);
-  color: var(--color-accent);
-}
-.pdf-btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-.pdf-page-info {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--color-text);
-  min-width: 4rem;
-  text-align: center;
-}
-
 /* Дії в шапці (справа) */
 .pdf-view__actions {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  flex-shrink: 0;
 }
-.pdf-download-btn {
-  display: none;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.625rem 1.25rem;
-  background: var(--color-accent);
-  color: #fff;
-  border-radius: var(--radius-sm);
-  font-size: 0.875rem;
-  font-weight: 600;
-  border: none;
-  cursor: pointer;
-  transition: background var(--transition-fast);
-}
-@media (min-width: 768px) { .pdf-download-btn { display: flex; } }
-.pdf-download-btn:hover { background: var(--color-accent-hover); }
-
 .pdf-view__back {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.625rem 1.25rem;
+  padding: 0.625rem 1rem;
   background: var(--color-border);
   color: var(--color-text-secondary);
   border-radius: var(--radius-sm);
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   font-weight: 600;
   border: none;
   cursor: pointer;
   transition: all var(--transition-fast);
+  white-space: nowrap;
 }
 .pdf-view__back:hover { background: var(--color-border-light); color: var(--color-text); }
 
-/* Контейнер для Canvas */
+/* Тіло PDF — вертикальна прокрутка */
 .pdf-view__body {
   flex: 1;
   background: var(--color-bg);
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+  padding: 1rem;
+}
+@media (min-width: 768px) {
+  .pdf-view__body { padding: 2rem; }
+}
+
+/* Контейнер для всіх сторінок — вертикальна стрічка */
+.pdf-pages-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  max-width: 100%;
+}
+
+/* Обгортка однієї сторінки */
+.pdf-page-wrapper {
+  position: relative;
+  background: #fff;
+  box-shadow: var(--shadow-md);
+  border-radius: 4px;
+  overflow: hidden;
+  max-width: 100%;
+}
+.pdf-page-wrapper canvas {
+  display: block;
+  max-width: 100%;
+  height: auto !important;
+}
+
+/* Номер сторінки */
+.pdf-page-label {
+  text-align: center;
+  padding: 0.375rem 0;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-text-tertiary);
+  background: rgba(0,0,0,0.03);
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+[data-theme="dark"] .pdf-page-label {
+  background: rgba(255,255,255,0.03);
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Плаваючі кнопки зуму (FAB) */
+.pdf-zoom-fab {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 170;
+}
+.pdf-zoom-btn {
+  width: 3rem; height: 3rem;
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  padding: 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
 }
-.pdf-canvas-wrapper {
-  box-shadow: var(--shadow-lg);
-  border-radius: 4px;
-  background: #fff; /* PDF завжди має мати білий фон */
-  transition: transform 0.2s ease;
-  position: relative;
+.pdf-zoom-btn:hover {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
 }
-/* Щоб у темній темі PDF не зливався з фоном */
-[data-theme="dark"] .pdf-canvas-wrapper {
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+.pdf-zoom-btn:active {
+  transform: scale(0.92);
 }
 
 /* Лоадер для PDF */
@@ -1657,3 +1651,46 @@ button:focus-visible {
   font-weight: 600;
 }
 @keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* ═══════════════════════════════════════════
+   ГЛОБАЛЬНИЙ ЗАХИСТ ВІД OVERFLOW ТЕКСТУ
+   ═══════════════════════════════════════════ */
+
+/* Всі заголовки та тексти мають бути обмежені */
+.project-view__title,
+.project-view__type,
+.project-card__title,
+.project-card__type,
+.navbar-brand,
+.timeline-role,
+.timeline-company,
+.education-name,
+.education-desc,
+.quote-card-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* Контейнери не повинні допускати горизонтальний overflow */
+.hero-content,
+.resume-grid,
+.contacts-grid,
+.project-view__info,
+.project-view__nav,
+.project-view__gallery,
+.filter-bar {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* Захист від виходу тексту на дрібних екранах */
+@media (max-width: 360px) {
+  .contact-value { font-size: 0.7rem; }
+  .contact-value--lg { font-size: 0.85rem; }
+  .navbar-brand { font-size: 0.95rem; }
+  .project-nav-btn { padding: 0.75rem 1rem; font-size: 0.8rem; }
+  .project-nav-btn__label { font-size: 0.8rem; }
+  .pdf-view__header-left h3 { max-width: 100px; }
+}
