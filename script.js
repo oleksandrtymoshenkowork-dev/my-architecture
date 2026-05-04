@@ -437,37 +437,49 @@ function initPDF(url) {
 function renderAllPages() {
   const container = document.getElementById('pdf-pages-container');
   if (!container || !pdfDoc) return;
+  
+  // Зберігаємо позицію скролу
+  const body = document.getElementById('pdf-body');
+  const scrollRatio = body && body.scrollHeight > 0 ? body.scrollTop / body.scrollHeight : 0;
+  
   container.innerHTML = '';
 
-  // Визначаємо оптимальний масштаб
-  const body = document.getElementById('pdf-body');
+  // Визначаємо оптимальний масштаб — вписати в ширину І висоту контейнера
   const containerWidth = body ? body.clientWidth - 32 : window.innerWidth - 32; // 32px padding
+  const containerHeight = body ? body.clientHeight - 32 : window.innerHeight - 100; // header + padding
 
-  // Рендер кожної сторінки
-  const renderPromises = [];
+  // Рендер кожної сторінки послідовно для коректного порядку
+  let chain = Promise.resolve();
   for (let i = 1; i <= pdfDoc.numPages; i++) {
-    renderPromises.push(renderSinglePage(i, container, containerWidth));
+    chain = chain.then(() => renderSinglePage(i, container, containerWidth, containerHeight));
   }
 
-  Promise.all(renderPromises).then(() => {
-    // Базовий масштаб збережений
+  chain.then(() => {
+    // Відновлюємо позицію скролу після зуму
+    if (body && scrollRatio > 0) {
+      body.scrollTop = scrollRatio * body.scrollHeight;
+    }
   });
 }
 
-function renderSinglePage(pageNumber, container, containerWidth) {
+function renderSinglePage(pageNumber, container, containerWidth, containerHeight) {
   return pdfDoc.getPage(pageNumber).then(function(page) {
-    // Визначаємо масштаб для якості
     const unscaledViewport = page.getViewport({ scale: 1.0 });
     
     // Масштаб щоб вписати в ширину контейнера
-    const fitScale = containerWidth / unscaledViewport.width;
-    pdfBaseScale = fitScale;
+    const fitWidthScale = containerWidth / unscaledViewport.width;
+    // Масштаб щоб вписати в висоту контейнера (одна сторінка = один екран)
+    const fitHeightScale = containerHeight / unscaledViewport.height;
+    // Обираємо менший щоб вписати і по ширині, і по висоті
+    const fitScale = Math.min(fitWidthScale, fitHeightScale);
+    
+    if (pageNumber === 1) pdfBaseScale = fitScale;
     
     // Рендеримо з вищою якістю (devicePixelRatio)
     const pixelRatio = window.devicePixelRatio || 1;
-    const renderScale = fitScale * pdfScale * pixelRatio;
     const displayScale = fitScale * pdfScale;
-    
+    const renderScale = displayScale * Math.min(pixelRatio, 2); // обмежуємо для продуктивності
+
     const viewport = page.getViewport({ scale: renderScale });
     const displayViewport = page.getViewport({ scale: displayScale });
 
@@ -484,8 +496,8 @@ function renderSinglePage(pageNumber, container, containerWidth) {
     canvas.height = viewport.height;
     
     // CSS розмір — реальний розмір на екрані
-    canvas.style.width = `${displayViewport.width}px`;
-    canvas.style.height = `${displayViewport.height}px`;
+    canvas.style.width = `${Math.round(displayViewport.width)}px`;
+    canvas.style.height = `${Math.round(displayViewport.height)}px`;
 
     pageWrapper.appendChild(canvas);
 
@@ -507,7 +519,7 @@ function renderSinglePage(pageNumber, container, containerWidth) {
 }
 
 function onPdfZoom(delta) {
-  let newScale = pdfScale + delta;
+  let newScale = Math.round((pdfScale + delta) * 10) / 10; // уникаємо floating point
   if (newScale < 0.5) newScale = 0.5;
   if (newScale > 4.0) newScale = 4.0;
   
